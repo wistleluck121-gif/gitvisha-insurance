@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import logoAsset from "@/assets/gitvisha-logo.png.asset.json";
 import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
@@ -86,15 +87,14 @@ const claimSteps = [
 
 function BrandMark({ light = false }: { light?: boolean }) {
   return (
-    <a href="#home" className="group inline-flex items-center gap-3" aria-label="Gitvisha home">
-      <span className="relative grid size-9 shrink-0 place-items-center overflow-hidden rounded-md bg-primary text-primary-foreground">
-        <ShieldCheck className="size-5" strokeWidth={1.8} />
-        <span className="absolute bottom-0 h-0.5 w-full bg-magenta" />
-      </span>
-      <span className="min-w-0">
-        <span className={`block font-display text-xl font-bold leading-none ${light ? "text-primary-foreground" : "text-ink"}`}>Gitvisha</span>
-        <span className={`mt-1 block text-[9px] font-semibold uppercase tracking-[0.18em] ${light ? "text-cyan-soft" : "text-ink-soft"}`}>Infinite Trust. Secure Peace</span>
-      </span>
+    <a href="#home" className="inline-flex shrink-0 items-center" aria-label="Gitvisha home">
+      <img
+        src={logoAsset.url}
+        alt="Gitvisha — Infinite Trust, Secure Peace"
+        width={700}
+        height={700}
+        className={`aspect-square rounded-full object-contain ${light ? "size-28 sm:size-32" : "size-16 sm:size-[72px]"}`}
+      />
     </a>
   );
 }
