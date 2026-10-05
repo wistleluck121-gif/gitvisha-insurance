@@ -18,7 +18,7 @@ import {
   PackageCheck,
   Phone,
   Scale,
-
+  ShieldCheck,
   Ship,
   Store,
   Truck,
