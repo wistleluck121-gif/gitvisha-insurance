@@ -79,6 +79,7 @@ function CarInsurancePage() {
     <section className="relative overflow-hidden bg-surface-deep text-primary-foreground">
       <img src={carImage} alt="Silver car in a studio" width={1536} height={864} fetchPriority="high" className="absolute inset-0 size-full object-cover object-[65%_center]" />
       <div className="absolute inset-0 bg-surface-deep/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-deep via-surface-deep/70 to-transparent lg:hidden" />
       <div className="relative mx-auto max-w-7xl px-5 pb-64 pt-8 sm:pb-72 lg:px-8 lg:pb-24">
         <nav aria-label="Breadcrumb" className="mb-12 flex items-center gap-2 text-xs text-cyan-soft"><Link to="/" className="min-h-11 content-center hover:underline">Home</Link><ChevronRight className="size-3" /><span aria-current="page">Car Insurance</span></nav>
         <div className="max-w-lg">
