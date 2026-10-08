@@ -12,3 +12,6 @@
 ## Project architecture
 
 - Keep the public marketing experience as one anchored page because the requested navigation is an intentional single-page flow.
+- Dedicated insurance product pages use separate TanStack leaf routes; the homepage remains anchored so its original navigation is preserved.
+- Share Gitvisha chrome through site-chrome and product sections/forms through insurance modules so future product pages reuse the approved structure without redesigning the homepage.
+- Validate vehicle enquiries through the shared schema without sending or persisting data until an explicit submission integration is requested.
