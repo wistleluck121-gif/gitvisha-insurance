@@ -31,7 +31,8 @@ export function VehicleQuoteForm() {
         next[field] ??= issue.message;
       }
       setErrors(next);
-      const first = form.elements.namedItem(Object.keys(next)[0]);
+      const firstName = Object.keys(next)[0];
+      const first = firstName ? form.elements.namedItem(firstName) : null;
       if (first instanceof HTMLElement) first.focus();
       return;
     }
