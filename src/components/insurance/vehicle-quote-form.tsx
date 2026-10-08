@@ -45,7 +45,7 @@ export function VehicleQuoteForm() {
   const errorProps = (name: FieldName) => ({ "aria-invalid": !!errors[name], "aria-describedby": errors[name] ? `car-${name}-error` : undefined });
   const error = (name: FieldName) => errors[name] && <p id={`car-${name}-error`} className="text-xs text-destructive">{errors[name]}</p>;
 
-  return <form onSubmit={submit} noValidate className="rounded-2xl border border-line-dark bg-surface-dark/80 p-6 shadow-elegant sm:p-8" aria-label="Car insurance enquiry" onChange={() => { if (complete) setComplete(false); }}>
+  return <form onSubmit={submit} noValidate className="rounded-2xl border border-line-dark bg-surface-dark/80 p-6 shadow-lg shadow-cyan/10 sm:p-8" aria-label="Car insurance enquiry" onChange={() => { if (complete) setComplete(false); }}>
     <div className="sm:col-span-2">
       <p className="text-xs font-bold uppercase tracking-wide text-cyan">Car insurance enquiry</p>
       <h3 className="mt-1 text-xl font-semibold text-primary-foreground">Your car. Your coverage needs.</h3>
