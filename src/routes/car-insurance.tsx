@@ -93,14 +93,13 @@ function CarInsurancePage() {
       </div>
     </section>
 
-    <section id="quote" className="scroll-mt-24 border-b border-border bg-card py-14 lg:py-16">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:px-8">
-        <div className="lg:pt-6">
-          <p className="mb-4 text-xs font-bold uppercase text-ink-soft">Start with what matters</p>
-          <h2 className="text-3xl font-semibold leading-tight text-ink sm:text-4xl">The right cover starts with the right conversation.</h2>
-          <p className="mt-5 text-base leading-7 text-ink-soft">Whether you’re insuring a new car or reviewing a renewal, Gitvisha helps you understand suitable options and the details behind them.</p>
-          <ul className="mt-8 space-y-4">{["Understand cover, limits and deductibles", "Consider add-ons that fit your needs", "Keep policy and claims requirements clear"].map((text) => <li key={text} className="flex gap-3 text-sm leading-6 text-ink"><Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-primary" />{text}</li>)}</ul>
-          <div className="mt-8 border-t border-border pt-6"><p className="text-sm font-semibold text-ink">Prefer a conversation?</p><a href="mailto:info@gitvisha.com" className="mt-2 inline-block text-sm text-ink-soft underline underline-offset-4">info@gitvisha.com</a><p className="mt-2 text-xs text-muted-foreground">Contact address is a placeholder pending confirmation.</p></div>
+    <section id="quote" className="scroll-mt-24 bg-surface-deep py-12 text-primary-foreground lg:py-14">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.7fr_1.1fr] lg:items-center lg:gap-14 lg:px-8">
+        <div>
+          <p className="mb-3 text-xs font-bold uppercase text-cyan">Start with what matters</p>
+          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl">The right cover starts with the right conversation.</h2>
+          <ul className="mt-6 space-y-3">{["Understand cover, limits and deductibles", "Consider add-ons that fit your needs", "Keep policy and claims requirements clear"].map((text) => <li key={text} className="flex gap-3 text-sm leading-6 text-cyan-soft"><Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-cyan" />{text}</li>)}</ul>
+          <div className="mt-7 border-t border-line-dark pt-5"><p className="text-sm font-semibold">Prefer a conversation?</p><a href="mailto:info@gitvisha.com" className="mt-1 inline-block text-sm text-cyan-soft underline underline-offset-4">info@gitvisha.com</a><p className="mt-1 text-xs text-cyan-soft/70">Contact address is a placeholder pending confirmation.</p></div>
         </div>
         <VehicleQuoteForm />
       </div>
