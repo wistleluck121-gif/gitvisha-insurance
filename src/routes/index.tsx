@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import logoAsset from "@/assets/gitvisha-logo.png.asset.json";
+import { Link } from "@tanstack/react-router";
+import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+import { strengths } from "@/lib/insurance/shared";
 import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
@@ -14,7 +16,6 @@ import {
   Hotel,
   Landmark,
   Mail,
-  Menu,
   PackageCheck,
   Phone,
   Scale,
@@ -24,7 +25,6 @@ import {
   Truck,
   Warehouse,
   Wrench,
-  X,
   Zap,
   type LucideIcon,
 } from "lucide-react";
@@ -51,11 +51,6 @@ export const Route = createFileRoute("/")({
 
 type IconItem = { title: string; description: string; icon: LucideIcon };
 
-const navItems = [
-  ["Home", "#home"], ["About Us", "#about"], ["Insurance Solutions", "#solutions"],
-  ["Industries", "#industries"], ["Claims Assistance", "#claims"], ["Contact", "#contact"],
-] as const;
-
 const solutions: IconItem[] = [
   { title: "Property & Fire Insurance", description: "Protection for buildings, stock, equipment, and operating assets.", icon: Flame },
   { title: "Engineering Insurance", description: "Coverage for projects, machinery, installation, and operational risks.", icon: Wrench },
@@ -65,11 +60,6 @@ const solutions: IconItem[] = [
   { title: "Group Health & Personal Accident", description: "Employee-focused health and accident protection solutions.", icon: HeartPulse },
   { title: "Business Interruption", description: "Support against insured disruptions affecting business continuity.", icon: Zap },
   { title: "Specialty & Corporate Risks", description: "Structured solutions for complex and evolving exposures.", icon: ShieldCheck },
-];
-
-const strengths = [
-  "Tailored risk solutions", "End-to-end policy support", "Dedicated claims assistance",
-  "Transparent advisory", "Corporate risk expertise",
 ];
 
 const industries = [
@@ -85,20 +75,6 @@ const claimSteps = [
   { number: "04", title: "Resolve", detail: "Support clear communication through the claim's conclusion.", icon: CircleCheck },
 ];
 
-function BrandMark({ light = false }: { light?: boolean }) {
-  return (
-    <a href="#home" className="inline-flex shrink-0 items-center" aria-label="Gitvisha home">
-      <img
-        src={logoAsset.url}
-        alt="Gitvisha — Infinite Trust, Secure Peace"
-        width={700}
-        height={700}
-        className={`aspect-square rounded-full object-contain ${light ? "size-28 sm:size-32" : "size-16 sm:size-[72px]"}`}
-      />
-    </a>
-  );
-}
-
 function SectionIntro({ eyebrow, title, copy, light = false }: { eyebrow: string; title: string; copy?: string; light?: boolean }) {
   return (
     <div className="max-w-2xl">
@@ -110,7 +86,6 @@ function SectionIntro({ eyebrow, title, copy, light = false }: { eyebrow: string
 }
 
 function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   function submitForm(event: FormEvent<HTMLFormElement>) {
@@ -123,28 +98,9 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-lg">
-        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 lg:px-8">
-          <BrandMark />
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
-            {navItems.map(([label, href]) => <a key={href} href={href} className="text-xs font-semibold text-ink-soft transition-colors hover:text-primary">{label}</a>)}
-            <Button asChild size="lg"><a href="#contact">Get a Quote <ArrowRight /></a></Button>
-          </nav>
-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMenuOpen((v) => !v)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>
-            {menuOpen ? <X /> : <Menu />}
-          </Button>
-        </div>
-        {menuOpen && (
-          <nav className="border-t border-border bg-background px-5 py-5 lg:hidden" aria-label="Mobile navigation">
-            <div className="mx-auto grid max-w-7xl gap-1">
-              {navItems.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-3 text-sm font-semibold text-ink hover:bg-muted">{label}</a>)}
-              <Button asChild className="mt-3"><a href="#contact" onClick={() => setMenuOpen(false)}>Get a Quote <ArrowRight /></a></Button>
-            </div>
-          </nav>
-        )}
-      </header>
+      <SiteHeader />
 
-      <main>
+      <div>
         <section id="home" className="hero-grid relative overflow-hidden bg-surface-deep text-primary-foreground">
           <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-24">
             <div className="relative z-10 max-w-3xl">
@@ -178,12 +134,12 @@ function HomePage() {
             <SectionIntro eyebrow="Insurance solutions" title="Protection structured around real-world risk." copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options." />
             <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
               {solutions.map(({ title, description, icon: Icon }, index) => (
-                <article key={title} className="group min-h-64 bg-card p-7 transition-colors hover:bg-secondary">
+                <article key={title} className="group relative min-h-64 bg-card p-7 transition-colors hover:bg-secondary">
                   <div className="flex items-start justify-between">
                     <span className="grid size-11 place-items-center rounded-md bg-secondary text-primary"><Icon className="size-5" strokeWidth={1.7} /></span>
                     <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-ink">{title}</h3>
+                  <h3 className="mt-8 text-lg font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : title}</h3>
                   <p className="mt-3 text-sm leading-6 text-ink-soft">{description}</p>
                 </article>
               ))}
@@ -284,22 +240,9 @@ function HomePage() {
             </form>
           </div>
         </section>
-      </main>
+      </div>
 
-      <footer className="bg-surface-deep text-primary-foreground">
-        <div className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
-          <div className="grid gap-10 border-b border-line-dark pb-10 md:grid-cols-[1fr_auto]">
-            <BrandMark light />
-            <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Footer navigation">
-              {navItems.slice(1).map(([label, href]) => <a key={href} href={href} className="text-xs text-cyan-soft/70 hover:text-cyan">{label}</a>)}
-            </nav>
-          </div>
-          <div className="flex flex-col gap-4 pt-7 text-xs text-cyan-soft/55 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 Gitvisha. All rights reserved.</p>
-            <div className="flex gap-5"><span>Privacy Policy</span><span>Terms of Use</span></div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
