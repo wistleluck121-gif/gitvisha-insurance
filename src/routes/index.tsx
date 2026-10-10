@@ -4,6 +4,9 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import constructionAsset from "@/assets/construction.webp.asset.json";
 import logisticsAsset from "@/assets/logistics.webp.asset.json";
 import industryAsset from "@/assets/industry.webp.asset.json";
+import industrySmall from "@/assets/industry-small.webp.asset.json";
+import constructionSmall from "@/assets/construction-small.webp.asset.json";
+import logisticsSmall from "@/assets/logistics-small.webp.asset.json";
 import { strengths } from "@/lib/insurance/shared";
 import { useState, type FormEvent } from "react";
 import {
@@ -173,7 +176,7 @@ function HomePage() {
               </div>
             </div>
             <div className="mt-9 grid gap-5 sm:grid-cols-3">
-              {[{asset: industryAsset, title: "Manufacturing", alt: "Precision electronics work in a manufacturing setting"}, {asset: constructionAsset, title: "Infrastructure & Construction", alt: "Construction professionals working on an infrastructure site"}, {asset: logisticsAsset, title: "Logistics & Warehousing", alt: "Cargo containers at a freight terminal"}].map(({asset, title, alt}) => <figure key={title}><div className="aspect-[3/2] overflow-hidden rounded-md"><img src={asset.url} alt={alt} width={800} height={533} loading="lazy" decoding="async" className="size-full object-cover" /></div><figcaption className="border-b border-border py-3 text-sm font-semibold text-ink">{title}</figcaption></figure>)}
+              {[{asset: industryAsset, small: industrySmall, title: "Manufacturing", alt: "Precision electronics work in a manufacturing setting"}, {asset: constructionAsset, small: constructionSmall, title: "Infrastructure & Construction", alt: "Construction professionals working on an infrastructure site"}, {asset: logisticsAsset, small: logisticsSmall, title: "Logistics & Warehousing", alt: "Cargo containers at a freight terminal"}].map(({asset, small, title, alt}) => <figure key={title}><div className="aspect-[3/2] overflow-hidden rounded-md"><img src={asset.url} srcSet={`${small.url} 480w, ${asset.url} 800w`} sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1279px) 31vw, 390px" alt={alt} width={800} height={533} loading="lazy" decoding="async" className="size-full object-cover" /></div><figcaption className="border-b border-border py-3 text-sm font-semibold text-ink">{title}</figcaption></figure>)}
             </div>
           </div>
         </section>
