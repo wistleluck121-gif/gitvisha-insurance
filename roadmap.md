@@ -1,6 +1,5 @@
-# Car insurance upgrade
-- [x] Share existing header/footer without changing homepage appearance.
-- [x] Add dedicated car insurance content, quote form, FAQ, and metadata.
-- [x] Link only the homepage Motor Insurance card.
-- [x] Verify navigation, validation, tests, and desktop/tablet/mobile preview. Do not publish.
-- [x] Recheck the current implementation's automatic build status and live /car-insurance preview.
+# Gitvisha editorial redesign
+- [ ] Refine homepage, shared chrome and existing car insurance page in the light editorial palette.
+- [ ] Preserve all routes, navigation, claims steps and existing form behavior.
+- [ ] Optimize relevant image assets to WebP and record transfer savings.
+- [ ] Run available tests, inspect automatic production build checks and verify desktop/tablet/mobile routes and CTAs. Do not publish.
