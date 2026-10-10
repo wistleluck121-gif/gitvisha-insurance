@@ -17,6 +17,7 @@ function BrandMark({ light = false }: { light?: boolean }) {
         alt="Gitvisha — Infinite Trust, Secure Peace"
         width={280}
         height={280}
+        decoding="async"
         className={`aspect-square rounded-full object-contain ${light ? "size-24 sm:size-28" : "size-14 sm:size-[72px]"}`}
       />
     </Link>

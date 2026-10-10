@@ -58,7 +58,7 @@ export function VehicleQuoteForm() {
       </div>)}
       <div className="space-y-1.5">
         <Label htmlFor="car-policyType" className="text-xs font-medium text-ink-soft">Policy Type</Label>
-        <select id="car-policyType" name="policyType" required defaultValue="" className={`${fieldClass} w-full appearance-none px-3`} {...errorProps("policyType")}>
+        <select id="car-policyType" name="policyType" required defaultValue="" className={`${fieldClass} w-full border px-3 text-sm`} {...errorProps("policyType")}>
           <option value="" disabled>Select a policy type</option>
           {policyTypes.map((type) => <option key={type}>{type}</option>)}
         </select>{error("policyType")}

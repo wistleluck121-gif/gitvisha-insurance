@@ -78,12 +78,12 @@ const claimSteps = [
   { number: "04", title: "Resolve", detail: "Support clear communication through the claim's conclusion.", icon: CircleCheck },
 ];
 
-function SectionIntro({ eyebrow, title, copy, light = false }: { eyebrow: string; title: string; copy?: string; light?: boolean }) {
+function SectionIntro({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
   return (
     <div className="max-w-2xl">
-      <p className={`mb-4 text-xs font-bold uppercase  ${light ? "text-primary" : "text-primary"}`}>{eyebrow}</p>
-      <h2 className={`text-3xl font-semibold leading-tight sm:text-4xl lg:text-4xl ${light ? "text-ink" : "text-ink"}`}>{title}</h2>
-      {copy && <p className={`mt-5 max-w-xl text-base leading-7 ${light ? "text-primary-soft/80" : "text-ink-soft"}`}>{copy}</p>}
+      <p className="mb-4 text-xs font-bold uppercase text-primary">{eyebrow}</p>
+      <h2 className="text-3xl font-semibold leading-tight text-ink sm:text-4xl">{title}</h2>
+      {copy && <p className="mt-5 max-w-xl text-base leading-7 text-ink-soft">{copy}</p>}
     </div>
   );
 }
@@ -105,7 +105,7 @@ function HomePage() {
 
       <div>
         <section id="home" className="scroll-mt-20 border-b border-border bg-secondary">
-          <div className="mx-auto max-w-7xl px-5 py-14 sm:py-20 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-7xl px-5 py-10 sm:py-20 lg:px-8 lg:py-20">
             <p className="mb-6 text-xs font-bold uppercase text-primary">Insurance · Risk · Claims</p>
             <h1 className="max-w-4xl text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl lg:text-6xl">Protecting What Matters.<br /><span className="text-primary">Securing What's Ahead.</span></h1>
             <div className="mt-8 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -119,7 +119,7 @@ function HomePage() {
         <section id="solutions" className="scroll-mt-20 bg-background py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionIntro eyebrow="Insurance solutions" title="Protection structured around real-world risk." copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options." />
-            <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+             <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
               {solutions.map(({ title, description, icon: Icon }, index) => (
                 <article key={title} className="group relative bg-card p-5 sm:p-6">
                   <div className="flex items-start justify-between">
