@@ -73,27 +73,27 @@
 
 :root {
   --radius: 0.4rem;
-  --background: oklch(0.985 0.004 240);
+  --background: oklch(0.995 0.002 210);
   --foreground: oklch(0.19 0.035 255);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.64 0.16 227);
+  --primary: oklch(0.43 0.085 215);
   --primary-foreground: oklch(0.99 0.002 240);
-  --secondary: oklch(0.95 0.015 236);
+  --secondary: oklch(0.96 0.025 215);
   --secondary-foreground: oklch(0.22 0.045 253);
   --muted: oklch(0.955 0.008 245);
   --muted-foreground: oklch(0.49 0.028 255);
-  --accent: oklch(0.91 0.055 224);
+  --accent: oklch(0.96 0.025 165);
   --accent-foreground: oklch(0.22 0.045 253);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.89 0.018 245);
   --input: oklch(0.85 0.02 245);
-  --ring: oklch(0.64 0.16 227);
-  --ink: oklch(0.2 0.04 255);
-  --ink-soft: oklch(0.43 0.035 255);
+  --ring: oklch(0.43 0.085 215);
+  --ink: oklch(0.29 0.045 220);
+  --ink-soft: oklch(0.46 0.025 220);
   --surface-dark: oklch(0.205 0.035 255);
   --surface-deep: oklch(0.14 0.03 255);
   --cyan: oklch(0.76 0.13 210);
@@ -173,17 +173,6 @@
   }
 }
 
-@utility hero-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--cyan) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--cyan) 7%, transparent) 1px, transparent 1px);
-  background-size: 58px 58px;
-}
-
-@utility visual-glow {
-  box-shadow: 0 0 80px color-mix(in oklab, var(--cyan) 17%, transparent);
-}
-
 @utility section-rule {
   border-top: 1px solid var(--color-border);
 }
@@ -196,3 +185,5 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@layer base { a, button, input, select, textarea { scroll-margin-top: 6rem; } }

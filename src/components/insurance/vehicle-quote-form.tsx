@@ -16,7 +16,7 @@ const fields: { name: FieldName; label: string; placeholder?: string; type?: str
   { name: "makeModel", label: "Car Make / Model", placeholder: "e.g. Maruti Suzuki Baleno" },
 ];
 
-const fieldClass = "h-10 rounded-lg border-primary-foreground/15 bg-primary-foreground/5 text-primary-foreground placeholder:text-cyan-soft/50 focus-visible:ring-cyan";
+const fieldClass = "h-11 rounded-md border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-ring";
 
 export function VehicleQuoteForm() {
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
@@ -45,41 +45,41 @@ export function VehicleQuoteForm() {
   const errorProps = (name: FieldName) => ({ "aria-invalid": !!errors[name], "aria-describedby": errors[name] ? `car-${name}-error` : undefined });
   const error = (name: FieldName) => errors[name] && <p id={`car-${name}-error`} className="text-xs text-destructive">{errors[name]}</p>;
 
-  return <form onSubmit={submit} noValidate className="rounded-2xl border border-line-dark bg-surface-dark/80 p-6 shadow-lg shadow-cyan/10 sm:p-8" aria-label="Car insurance enquiry" onChange={() => { if (complete) setComplete(false); }}>
+  return <form onSubmit={submit} noValidate className="rounded-lg border border-border bg-card p-5 sm:p-6" aria-label="Car insurance enquiry" onChange={() => { if (complete) setComplete(false); }}>
     <div className="sm:col-span-2">
-      <p className="text-xs font-bold uppercase tracking-wide text-cyan">Car insurance enquiry</p>
-      <h3 className="mt-1 text-xl font-semibold text-primary-foreground">Your car. Your coverage needs.</h3>
+      <p className="text-xs font-bold uppercase tracking-wide text-primary">Car insurance enquiry</p>
+      <h3 className="mt-1 text-xl font-semibold text-ink">Your car. Your coverage needs.</h3>
     </div>
     <div className="mt-6 grid gap-4 sm:grid-cols-2">
       {fields.map(({ name, label, placeholder, type, autoComplete, optional }) => <div className="space-y-1.5" key={name}>
-        <Label htmlFor={`car-${name}`} className="text-xs font-medium text-cyan-soft">{label}{optional && <span className="font-normal text-cyan-soft/70"> · optional</span>}</Label>
+        <Label htmlFor={`car-${name}`} className="text-xs font-medium text-ink-soft">{label}{optional && <span className="font-normal text-muted-foreground"> · optional</span>}</Label>
         <Input id={`car-${name}`} name={name} type={type ?? "text"} autoComplete={autoComplete} placeholder={placeholder} required={!optional} className={fieldClass} {...errorProps(name)} />
         {error(name)}
       </div>)}
       <div className="space-y-1.5">
-        <Label htmlFor="car-policyType" className="text-xs font-medium text-cyan-soft">Policy Type</Label>
+        <Label htmlFor="car-policyType" className="text-xs font-medium text-ink-soft">Policy Type</Label>
         <select id="car-policyType" name="policyType" required defaultValue="" className={`${fieldClass} w-full appearance-none px-3`} {...errorProps("policyType")}>
           <option value="" disabled>Select a policy type</option>
           {policyTypes.map((type) => <option key={type}>{type}</option>)}
         </select>{error("policyType")}
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="car-expiry" className="text-xs font-medium text-cyan-soft">Existing Policy Expiry<span className="font-normal text-cyan-soft/70"> · optional</span></Label>
-        <Input id="car-expiry" name="expiry" type="date" className={`${fieldClass} min-w-0 [color-scheme:dark]`} {...errorProps("expiry")} />
+        <Label htmlFor="car-expiry" className="text-xs font-medium text-ink-soft">Existing Policy Expiry<span className="font-normal text-muted-foreground"> · optional</span></Label>
+        <Input id="car-expiry" name="expiry" type="date" className={`${fieldClass} min-w-0 [color-scheme:light]`} {...errorProps("expiry")} />
         {error("expiry")}
       </div>
       <div className="space-y-1.5 sm:col-span-2">
-        <Label htmlFor="car-message" className="text-xs font-medium text-cyan-soft">Requirement / Message<span className="font-normal text-cyan-soft/70"> · optional</span></Label>
-        <Textarea id="car-message" name="message" placeholder="New car, renewal, a policy question, or specific cover you need…" className="rounded-lg border-primary-foreground/15 bg-primary-foreground/5 text-primary-foreground placeholder:text-cyan-soft/50 focus-visible:ring-cyan" />
+        <Label htmlFor="car-message" className="text-xs font-medium text-ink-soft">Requirement / Message<span className="font-normal text-muted-foreground"> · optional</span></Label>
+        <Textarea id="car-message" name="message" placeholder="New car, renewal, a policy question, or specific cover you need…" className="min-h-20 rounded-md border-border bg-background text-foreground placeholder:text-muted-foreground focus-visible:ring-ring" />
       </div>
     </div>
-    <div className="mt-6 space-y-3 border-t border-line-dark pt-5">
-      <Button type="submit" size="lg" className="min-h-12 w-full rounded-xl" disabled={complete}>Review Enquiry <ArrowRight /></Button>
-      <p className="flex items-start gap-2 text-xs leading-5 text-cyan-soft"><LockKeyhole aria-hidden="true" className="mt-0.5 size-4 shrink-0" />This preview does not send or save your details. No quote or policy is issued here.</p>
+    <div className="mt-6 space-y-3 border-t border-border pt-5">
+      <Button type="submit" size="lg" className="min-h-12 w-full rounded-md" disabled={complete}>Review Enquiry <ArrowRight /></Button>
+      <p className="flex items-start gap-2 text-xs leading-5 text-ink-soft"><LockKeyhole aria-hidden="true" className="mt-0.5 size-4 shrink-0" />This preview does not send or save your details. No quote or policy is issued here.</p>
     </div>
-    {complete && <div ref={statusRef} tabIndex={-1} role="status" className="mt-4 rounded-xl border border-line-dark bg-primary-foreground/5 p-5 text-primary-foreground outline-none focus-visible:ring-2 focus-visible:ring-cyan">
-      <div className="flex items-start gap-3"><CircleCheck className="mt-0.5 size-5 shrink-0 text-cyan" /><div><h4 className="font-semibold">Your enquiry is ready to review.</h4><p className="mt-2 text-sm leading-6 text-cyan-soft">Nothing has been sent or saved. To discuss coverage, email <a href="mailto:info@gitvisha.com" className="font-semibold text-primary-foreground underline underline-offset-4">info@gitvisha.com</a>. Please confirm this contact address before sharing personal details.</p></div></div>
-      <Button type="button" variant="ghost" className="mt-3 min-h-11 text-cyan-soft hover:text-primary-foreground" onClick={() => setComplete(false)}><Pencil />Edit details</Button>
+    {complete && <div ref={statusRef} tabIndex={-1} role="status" className="mt-4 rounded-md border border-border bg-accent p-5 text-ink outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <div className="flex items-start gap-3"><CircleCheck className="mt-0.5 size-5 shrink-0 text-primary" /><div><h4 className="font-semibold">Your enquiry is ready to review.</h4><p className="mt-2 text-sm leading-6 text-ink-soft">Nothing has been sent or saved. To discuss coverage, email <a href="mailto:info@gitvisha.com" className="font-semibold text-ink underline underline-offset-4">info@gitvisha.com</a>. Please confirm this contact address before sharing personal details.</p></div></div>
+      <Button type="button" variant="ghost" className="mt-3 min-h-11 text-ink-soft hover:text-ink" onClick={() => setComplete(false)}><Pencil />Edit details</Button>
     </div>}
   </form>;
 }
