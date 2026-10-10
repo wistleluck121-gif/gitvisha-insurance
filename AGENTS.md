@@ -15,3 +15,6 @@
 - Dedicated insurance product pages use separate TanStack leaf routes; the homepage remains anchored so its original navigation is preserved.
 - Share Gitvisha chrome through site-chrome and product sections/forms through insurance modules so future product pages reuse the approved structure without redesigning the homepage.
 - Validate vehicle enquiries through the shared schema without sending or persisting data until an explicit submission integration is requested.
+
+- Store optimized downloaded media as Lovable asset pointers and preserve source originals outside the served path to keep page transfers small.
+- Express the shared editorial presentation through semantic global tokens and insurance modules so homepage and product routes stay visually consistent.

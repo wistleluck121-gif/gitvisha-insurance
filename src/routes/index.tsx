@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+import constructionAsset from "@/assets/construction.webp.asset.json";
+import logisticsAsset from "@/assets/logistics.webp.asset.json";
+import industryAsset from "@/assets/industry.webp.asset.json";
+import industrySmall from "@/assets/industry-small.webp.asset.json";
+import constructionSmall from "@/assets/construction-small.webp.asset.json";
+import logisticsSmall from "@/assets/logistics-small.webp.asset.json";
 import { strengths } from "@/lib/insurance/shared";
 import { useState, type FormEvent } from "react";
 import {
@@ -75,12 +81,12 @@ const claimSteps = [
   { number: "04", title: "Resolve", detail: "Support clear communication through the claim's conclusion.", icon: CircleCheck },
 ];
 
-function SectionIntro({ eyebrow, title, copy, light = false }: { eyebrow: string; title: string; copy?: string; light?: boolean }) {
+function SectionIntro({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
   return (
     <div className="max-w-2xl">
-      <p className={`mb-4 text-xs font-bold uppercase tracking-[0.22em] ${light ? "text-cyan" : "text-primary"}`}>{eyebrow}</p>
-      <h2 className={`text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl ${light ? "text-primary-foreground" : "text-ink"}`}>{title}</h2>
-      {copy && <p className={`mt-5 max-w-xl text-base leading-7 ${light ? "text-cyan-soft/80" : "text-ink-soft"}`}>{copy}</p>}
+      <p className="mb-4 text-xs font-bold uppercase text-primary">{eyebrow}</p>
+      <h2 className="text-3xl font-semibold leading-tight text-ink sm:text-4xl">{title}</h2>
+      {copy && <p className="mt-5 max-w-xl text-base leading-7 text-ink-soft">{copy}</p>}
     </div>
   );
 }
@@ -101,45 +107,29 @@ function HomePage() {
       <SiteHeader />
 
       <div>
-        <section id="home" className="hero-grid relative overflow-hidden bg-surface-deep text-primary-foreground">
-          <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-24">
-            <div className="relative z-10 max-w-3xl">
-              <p className="mb-7 text-xs font-bold uppercase tracking-[0.28em] text-cyan">Insurance <span className="mx-2 text-magenta">•</span> Risk <span className="mx-2 text-magenta">•</span> Claims</p>
-              <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] sm:text-6xl lg:text-7xl">Protecting What Matters. <span className="text-cyan">Securing What's Ahead.</span></h1>
-              <p className="mt-7 max-w-2xl text-base leading-8 text-cyan-soft/80 sm:text-lg">Thoughtful insurance broking and risk advisory to help businesses and individuals understand exposure, choose suitable protection, and navigate claims with confidence.</p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="h-12 px-6"><a href="#contact">Get a Quote <ArrowRight /></a></Button>
-                <Button asChild variant="outline" size="lg" className="h-12 border-line-dark bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="#solutions">Explore Solutions <ChevronRight /></a></Button>
-              </div>
-              <div className="mt-14 flex items-center gap-4 border-t border-line-dark pt-6 text-sm text-cyan-soft/70">
-                <ShieldCheck className="size-5 shrink-0 text-cyan" />
-                <span>Clarity in cover. Consistency in support.</span>
-              </div>
+        <section id="home" className="scroll-mt-20 border-b border-border bg-secondary">
+          <div className="mx-auto max-w-7xl px-5 py-10 sm:py-20 lg:px-8 lg:py-20">
+            <p className="mb-6 text-xs font-bold uppercase text-primary">Insurance · Risk · Claims</p>
+            <h1 className="max-w-4xl text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl lg:text-6xl">Protecting What Matters.<br /><span className="text-primary">Securing What's Ahead.</span></h1>
+            <div className="mt-8 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
+              <p className="max-w-2xl text-base leading-8 text-ink-soft sm:text-lg">Thoughtful insurance broking and risk advisory to help businesses and individuals understand exposure, choose suitable protection, and navigate claims with confidence.</p>
+              <div className="flex flex-wrap gap-3"><Button asChild size="lg" className="min-h-12"><a href="#contact">Get a Quote <ArrowRight /></a></Button><Button asChild variant="outline" size="lg" className="min-h-12 bg-card"><a href="#solutions">Explore Solutions <ChevronRight /></a></Button></div>
             </div>
-
-            <div className="relative mx-auto hidden aspect-square w-full max-w-[470px] place-items-center lg:grid" aria-hidden="true">
-              <div className="visual-glow absolute size-[78%] rotate-45 rounded-[2rem] border border-cyan/30" />
-              <div className="absolute size-[58%] rotate-45 rounded-xl border border-primary/70 bg-surface-dark" />
-              <div className="absolute size-[36%] rotate-45 rounded-md bg-primary/15 ring-1 ring-cyan/40" />
-              <ShieldCheck className="relative z-10 size-28 text-cyan" strokeWidth={1} />
-              <div className="absolute left-4 top-16 h-px w-28 bg-magenta" />
-              <div className="absolute bottom-16 right-2 h-px w-36 bg-cyan" />
-              <div className="absolute right-7 top-8 size-3 bg-magenta" />
-            </div>
+            <div className="mt-10 flex items-center gap-3 border-t border-border pt-5 text-sm text-ink-soft"><ShieldCheck aria-hidden="true" className="size-5 text-primary" /><span>Clarity in cover. Consistency in support.</span></div>
           </div>
         </section>
 
-        <section id="solutions" className="scroll-mt-20 bg-background py-20 lg:py-28">
+        <section id="solutions" className="scroll-mt-20 bg-background py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionIntro eyebrow="Insurance solutions" title="Protection structured around real-world risk." copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options." />
-            <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+             <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
               {solutions.map(({ title, description, icon: Icon }, index) => (
-                <article key={title} className="group relative min-h-64 bg-card p-7 transition-colors hover:bg-secondary">
+                <article key={title} className="group relative bg-card p-5 sm:p-6">
                   <div className="flex items-start justify-between">
-                    <span className="grid size-11 place-items-center rounded-md bg-secondary text-primary"><Icon className="size-5" strokeWidth={1.7} /></span>
+                    <span className="text-primary"><Icon className="size-5" strokeWidth={1.7} /></span>
                     <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : title}</h3>
+                  <h3 className="mt-5 text-base font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : title}</h3>
                   <p className="mt-3 text-sm leading-6 text-ink-soft">{description}</p>
                 </article>
               ))}
@@ -147,7 +137,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="about" className="scroll-mt-20 section-rule bg-card py-20 lg:py-28">
+        <section id="about" className="scroll-mt-20 section-rule bg-card py-14 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
             <SectionIntro eyebrow="About Gitvisha" title="Advice grounded in understanding, not assumptions." copy="Gitvisha is an insurance broking and risk advisory firm focused on helping clients make informed protection decisions. We begin by understanding your operations, assets, people, and priorities—then work to identify relevant insurance solutions and provide support across the policy lifecycle." />
             <div className="relative border-l-2 border-primary pl-8 sm:pl-12">
@@ -157,22 +147,22 @@ function HomePage() {
           </div>
         </section>
 
-        <section className="bg-surface-deep py-20 lg:py-28">
+        <section className="bg-accent py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <SectionIntro eyebrow="Why Gitvisha" title="A steady partner across the insurance journey." light />
-            <div className="mt-12 grid gap-px border-y border-line-dark bg-line-dark md:grid-cols-5">
+            <SectionIntro eyebrow="Why Gitvisha" title="A steady partner across the insurance journey." />
+            <div className="mt-12 grid gap-px border-y border-border bg-border md:grid-cols-5">
               {strengths.map((item, index) => (
-                <div key={item} className="bg-surface-deep px-5 py-8">
-                  <span className="text-xs font-bold text-magenta">0{index + 1}</span>
-                  <Check className="mt-7 size-5 text-cyan" />
-                  <h3 className="mt-4 text-base font-semibold leading-6 text-primary-foreground">{item}</h3>
+                <div key={item} className="bg-accent px-5 py-5">
+                  <span className="text-xs font-bold text-primary">0{index + 1}</span>
+                  <Check className="mt-4 size-4 text-primary" />
+                  <h3 className="mt-4 text-base font-semibold leading-6 text-ink">{item}</h3>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="industries" className="scroll-mt-20 bg-background py-20 lg:py-28">
+        <section id="industries" className="scroll-mt-20 bg-background py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
               <SectionIntro eyebrow="Industries" title="Industry context shapes better risk conversations." copy="Every sector faces a different blend of operational, asset, liability, and people risks." />
@@ -185,10 +175,13 @@ function HomePage() {
                 ))}
               </div>
             </div>
+            <div className="mt-9 grid gap-5 sm:grid-cols-3">
+              {[{asset: industryAsset, small: industrySmall, title: "Manufacturing", alt: "Precision electronics work in a manufacturing setting"}, {asset: constructionAsset, small: constructionSmall, title: "Infrastructure & Construction", alt: "Construction professionals working on an infrastructure site"}, {asset: logisticsAsset, small: logisticsSmall, title: "Logistics & Warehousing", alt: "Cargo containers at a freight terminal"}].map(({asset, small, title, alt}) => <figure key={title}><div className="aspect-[3/2] overflow-hidden rounded-md"><img src={asset.url} srcSet={`${small.url} 480w, ${asset.url} 800w`} sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1279px) 31vw, 390px" alt={alt} width={800} height={533} loading="lazy" decoding="async" className="size-full object-cover" /></div><figcaption className="border-b border-border py-3 text-sm font-semibold text-ink">{title}</figcaption></figure>)}
+            </div>
           </div>
         </section>
 
-        <section id="claims" className="scroll-mt-20 bg-secondary py-20 lg:py-28">
+        <section id="claims" className="scroll-mt-20 bg-secondary py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <SectionIntro eyebrow="Claims assistance" title="Clear support when it matters most." copy="We help you understand requirements, organise information, and coordinate throughout the claims process." />
@@ -196,9 +189,9 @@ function HomePage() {
             </div>
             <div className="mt-14 grid gap-5 lg:grid-cols-4">
               {claimSteps.map(({ number, title, detail, icon: Icon }, index) => (
-                <article key={title} className="relative bg-card p-7 shadow-sm">
+                <article key={title} className="relative border-t border-border py-5">
                   <div className="flex items-center justify-between"><Icon className="size-6 text-primary" /><span className="font-mono text-xs text-muted-foreground">{number}</span></div>
-                  <h3 className="mt-8 text-xl font-semibold text-ink">{title}</h3>
+                  <h3 className="mt-5 text-xl font-semibold text-ink">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-ink-soft">{detail}</p>
                   {index < claimSteps.length - 1 && <ChevronRight className="absolute -right-4 top-1/2 z-10 hidden size-7 rounded-full bg-primary p-1 text-primary-foreground lg:block" />}
                 </article>
@@ -207,7 +200,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="contact" className="scroll-mt-20 bg-card py-20 lg:py-28">
+        <section id="contact" className="scroll-mt-20 bg-card py-14 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
             <div>
               <SectionIntro eyebrow="Start a conversation" title="Let’s understand your insurance needs." copy="Share a few details and our team can follow up to discuss the next step. This form does not submit to a server yet." />
