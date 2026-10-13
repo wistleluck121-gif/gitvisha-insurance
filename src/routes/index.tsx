@@ -119,7 +119,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section aria-label="Insurance companies" className="border-b border-border bg-card py-10 lg:py-12">
+        <section aria-label="Insurance companies" className="border-b border-border bg-accent py-10 lg:py-12">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <p className="text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">Insurers we work with</p>
             <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
