@@ -119,6 +119,19 @@ function HomePage() {
           </div>
         </section>
 
+        <section aria-label="Insurance companies" className="border-b border-border bg-card py-10 lg:py-12">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <p className="text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">Insurers we work with</p>
+            <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
+              {["SBI General Insurance", "ICICI Lombard", "HDFC ERGO", "TATA AIG", "Zurich Kotak", "Star Health"].map((name) => (
+                <div key={name} className="flex min-w-0 items-center justify-center bg-card px-4 py-6">
+                  <span className="truncate text-center text-sm font-semibold text-ink-soft sm:text-base">{name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="solutions" className="scroll-mt-20 bg-background py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionIntro eyebrow="Insurance solutions" title="Protection structured around real-world risk." copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options." />
