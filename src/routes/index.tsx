@@ -125,7 +125,7 @@ function HomePage() {
             <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
               {["SBI General Insurance", "ICICI Lombard", "HDFC ERGO", "TATA AIG", "Zurich Kotak", "Star Health"].map((name) => (
                 <div key={name} className="flex min-w-0 items-center justify-center bg-card px-4 py-6">
-                  <span className="truncate text-center text-sm font-semibold text-ink-soft sm:text-base">{name}</span>
+                  <span className="text-center text-sm font-semibold leading-snug text-ink-soft sm:text-base">{name}</span>
                 </div>
               ))}
             </div>
