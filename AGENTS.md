@@ -18,3 +18,4 @@
 
 - Store optimized downloaded media as Lovable asset pointers and preserve source originals outside the served path to keep page transfers small.
 - Express the shared editorial presentation through semantic global tokens and insurance modules so homepage and product routes stay visually consistent.
+- Define homepage product selection and insurance menus from one shared catalogue; route unbuilt products to the existing enquiry anchor rather than creating empty product pages.

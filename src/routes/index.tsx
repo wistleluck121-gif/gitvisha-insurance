@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+import { ProductSelector } from "@/components/insurance/product-selector";
 import constructionAsset from "@/assets/construction.webp.asset.json";
 import logisticsAsset from "@/assets/logistics.webp.asset.json";
 import industryAsset from "@/assets/industry.webp.asset.json";
@@ -93,6 +94,7 @@ function SectionIntro({ eyebrow, title, copy }: { eyebrow: string; title: string
 
 function HomePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [requirement, setRequirement] = useState("");
 
   function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -100,6 +102,7 @@ function HomePage() {
     if (!form.checkValidity()) { form.reportValidity(); return; }
     setSubmitted(true);
     form.reset();
+    setRequirement("");
   }
 
   return (
@@ -108,20 +111,28 @@ function HomePage() {
 
       <div>
         <section id="home" className="scroll-mt-20 border-b border-border bg-secondary">
-          <div className="mx-auto max-w-7xl px-5 py-10 sm:py-20 lg:px-8 lg:py-20">
-            <p className="mb-6 text-xs font-bold uppercase text-primary">Insurance · Risk · Claims</p>
-            <h1 className="max-w-4xl text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl lg:text-6xl">Protecting What Matters.<br /><span className="text-primary">Securing What's Ahead.</span></h1>
-            <div className="mt-8 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
-              <p className="max-w-2xl text-base leading-8 text-ink-soft sm:text-lg">Thoughtful insurance broking and risk advisory to help businesses and individuals understand exposure, choose suitable protection, and navigate claims with confidence.</p>
-              <div className="flex flex-wrap gap-3"><Button asChild size="lg" className="min-h-12"><a href="#contact">Get a Quote <ArrowRight /></a></Button><Button asChild variant="outline" size="lg" className="min-h-12 bg-card"><a href="#solutions">Explore Solutions <ChevronRight /></a></Button></div>
+          <div className="relative isolate overflow-hidden border-b border-border">
+            <img src={logisticsAsset.url} srcSet={`${logisticsSmall.url} 480w, ${logisticsAsset.url} 800w`} sizes="100vw" alt="Cargo containers at a freight terminal" width={800} height={533} fetchPriority="high" decoding="async" className="absolute inset-0 -z-20 size-full object-cover object-center" />
+            <div className="absolute inset-0 -z-10 bg-background/90" />
+            <div className="mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-12">
+              <p className="mb-3 text-xs font-bold uppercase text-primary">Insurance · Risk · Claims</p>
+              <h1 className="text-lg font-semibold text-ink">Gitvisha Insurance</h1>
+              <p className="mt-3 max-w-4xl font-display text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl">Protecting What Matters.<br /><span className="text-primary">Securing What's Ahead.</span></p>
+              <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                <p className="max-w-2xl text-sm leading-7 text-ink-soft sm:text-base">Thoughtful insurance broking and risk advisory to help businesses and individuals understand exposure, choose suitable protection, and navigate claims with confidence.</p>
+                <Button asChild size="lg" className="min-h-12 w-fit shrink-0"><a href="#contact">Get a Quote <ArrowRight /></a></Button>
+              </div>
             </div>
-            <div className="mt-10 flex items-center gap-3 border-t border-border pt-5 text-sm text-ink-soft"><ShieldCheck aria-hidden="true" className="size-5 text-primary" /><span>Clarity in cover. Consistency in support.</span></div>
+          </div>
+          <div className="mx-auto max-w-7xl px-5 pb-8 pt-6 lg:px-8">
+            <div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-lg font-semibold text-ink">What would you like to protect?</h2><a href="#solutions" className="flex items-center gap-2 text-xs font-semibold text-primary">Explore all solutions <ArrowRight className="size-4" /></a></div>
+            <ProductSelector onEnquire={setRequirement} />
           </div>
         </section>
 
         <section aria-label="Insurance companies" className="border-b border-border bg-accent py-10 lg:py-12">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <p className="text-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">Insurers we work with</p>
+            <p className="text-center text-xs font-semibold uppercase text-muted-foreground">Insurance companies</p>
             <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
               {["SBI General Insurance", "ICICI Lombard", "HDFC ERGO", "TATA AIG", "Zurich Kotak", "Star Health"].map((name) => (
                 <div key={name} className="flex min-w-0 items-center justify-center bg-card px-4 py-6">
@@ -135,14 +146,14 @@ function HomePage() {
         <section id="solutions" className="scroll-mt-20 bg-background py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionIntro eyebrow="Insurance solutions" title="Protection structured around real-world risk." copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options." />
-             <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
+             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
               {solutions.map(({ title, description, icon: Icon }, index) => (
-                <article key={title} className="group relative bg-card p-5 sm:p-6">
+                <article key={title} className="group relative rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary sm:p-6">
                   <div className="flex items-start justify-between">
                     <span className="text-primary"><Icon className="size-5" strokeWidth={1.7} /></span>
                     <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                   </div>
-                  <h3 className="mt-5 text-base font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : title}</h3>
+                  <h3 className="mt-5 text-base font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : <a href="#contact" onClick={() => setRequirement(title)} className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}</a>}</h3>
                   <p className="mt-3 text-sm leading-6 text-ink-soft">{description}</p>
                 </article>
               ))}
@@ -231,7 +242,7 @@ function HomePage() {
               <Field label="Email" id="email"><Input id="email" name="email" type="email" required placeholder="you@company.com" className="h-11 bg-card" /></Field>
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="requirement">Insurance Requirement</Label>
-                <select id="requirement" name="requirement" required defaultValue="" className="h-11 w-full rounded-md border border-input bg-card px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring">
+                <select id="requirement" name="requirement" required value={requirement} onChange={(event) => setRequirement(event.target.value)} className="h-11 w-full rounded-md border border-input bg-card px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring">
                   <option value="" disabled>Select a requirement</option>
                   {solutions.map((item) => <option key={item.title}>{item.title}</option>)}
                   <option>Claims Assistance</option><option>Other / Not Sure</option>
