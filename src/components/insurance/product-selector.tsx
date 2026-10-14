@@ -17,7 +17,7 @@ export function ProductSelector({ onEnquire }: { onEnquire: (requirement: string
             <h3 className="text-base font-semibold text-ink">{name}</h3>
             <p className="mb-4 mt-2 text-xs leading-5 text-ink-soft">{detail}</p>
             <Button asChild variant="link" className="mt-auto h-auto justify-start p-0 text-xs after:absolute after:inset-0">
-              {route ? <Link to={route}>Explore cover <ArrowRight /></Link> : <Link to="/" hash="contact" onClick={() => onEnquire(requirement)}>Make an enquiry <ArrowRight /></Link>}
+              {route ? <Link to={route}>Explore cover <ArrowRight /></Link> : <a href="#contact" onClick={() => onEnquire(requirement)}>Make an enquiry <ArrowRight /></a>}
             </Button>
           </article>)}
           <div className="flex flex-col justify-center border-l-2 border-primary px-5 py-4">

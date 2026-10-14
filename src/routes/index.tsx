@@ -102,6 +102,7 @@ function HomePage() {
     if (!form.checkValidity()) { form.reportValidity(); return; }
     setSubmitted(true);
     form.reset();
+    setRequirement("");
   }
 
   return (
@@ -152,7 +153,7 @@ function HomePage() {
                     <span className="text-primary"><Icon className="size-5" strokeWidth={1.7} /></span>
                     <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
                   </div>
-                  <h3 className="mt-5 text-base font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : <Link to="/" hash="contact" onClick={() => setRequirement(title)} className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}</Link>}</h3>
+                  <h3 className="mt-5 text-base font-semibold text-ink">{title === "Motor Insurance" ? <Link to="/car-insurance" className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}<ArrowRight className="ml-2 inline size-4" /></Link> : <a href="#contact" onClick={() => setRequirement(title)} className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring">{title}</a>}</h3>
                   <p className="mt-3 text-sm leading-6 text-ink-soft">{description}</p>
                 </article>
               ))}
