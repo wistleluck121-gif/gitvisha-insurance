@@ -1,7 +1,7 @@
 # Gitvisha reference-inspired redesign
-- [ ] Review available Square reference files and preserve existing routes and enquiry behavior.
-- [ ] Redesign homepage product selection and shared desktop/mobile insurance navigation.
-- [ ] Verify tests, automatic build checks, desktop/mobile navigation and enquiry flows; report changed files and limitations.
+- [x] Audit reference availability and existing features: HTML files absent, implemented from the user's described reference; existing homepage and car route preserved. No chatbot, careers route or live submission integration exists.
+- [x] Redesign homepage product selection and shared desktop/mobile insurance navigation; reuse existing assets and preserve below-fold sections.
+- [x] Seven tests passed; latest automatic build checks report build OK. Desktop, tablet, 390px and 320px mobile navigation, category switching and both valid enquiry flows verified without overflow or runtime errors. Not published.
 
 ## Previous editorial work
 - [x] Refine homepage, shared chrome and existing car insurance page in the light editorial palette.
