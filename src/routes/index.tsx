@@ -151,7 +151,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="solutions" className="scroll-mt-20 bg-background py-14 lg:py-20">
+        <section id="solutions" className="scroll-mt-20 bg-background py-12 lg:py-16">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionIntro eyebrow="Insurance solutions" title="Protection structured around real-world risk." copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options." />
              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
@@ -169,7 +169,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="about" className="scroll-mt-20 section-rule bg-card py-14 lg:py-20">
+        <section id="about" className="scroll-mt-20 section-rule bg-card py-12 lg:py-16">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
             <SectionIntro eyebrow="About Gitvisha" title="Advice grounded in understanding, not assumptions." copy="Gitvisha is an insurance broking and risk advisory firm focused on helping clients make informed protection decisions. We begin by understanding your operations, assets, people, and priorities—then work to identify relevant insurance solutions and provide support across the policy lifecycle." />
             <div className="relative border-l-2 border-primary pl-8 sm:pl-12">
@@ -179,7 +179,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section className="bg-accent py-14 lg:py-20">
+        <section className="bg-accent py-12 lg:py-16">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionIntro eyebrow="Why Gitvisha" title="A steady partner across the insurance journey." />
             <div className="mt-12 grid gap-px border-y border-border bg-border md:grid-cols-5">
@@ -194,7 +194,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="industries" className="scroll-mt-20 bg-background py-14 lg:py-20">
+        <section id="industries" className="scroll-mt-20 bg-background py-12 lg:py-16">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
               <SectionIntro eyebrow="Industries" title="Industry context shapes better risk conversations." copy="Every sector faces a different blend of operational, asset, liability, and people risks." />
@@ -213,7 +213,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="claims" className="scroll-mt-20 bg-secondary py-14 lg:py-20">
+        <section id="claims" className="scroll-mt-20 bg-secondary py-12 lg:py-16">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <SectionIntro eyebrow="Claims assistance" title="Clear support when it matters most." copy="We help you understand requirements, organise information, and coordinate throughout the claims process." />
@@ -232,7 +232,7 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="contact" className="scroll-mt-20 bg-card py-14 lg:py-20">
+        <section id="contact" className="scroll-mt-20 bg-card py-12 lg:py-16">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
             <div>
               <SectionIntro eyebrow="Start a conversation" title="Let’s understand your insurance needs." copy="Share a few details and our team can follow up to discuss the next step. This form does not submit to a server yet." />
