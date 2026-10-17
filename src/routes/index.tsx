@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { ProductSelector } from "@/components/insurance/product-selector";
+import { RiskOrbit } from "@/components/insurance/risk-orbit";
 import constructionAsset from "@/assets/construction.webp.asset.json";
 import logisticsAsset from "@/assets/logistics.webp.asset.json";
 import industryAsset from "@/assets/industry.webp.asset.json";
@@ -118,9 +119,12 @@ function HomePage() {
               <p className="mb-3 text-xs font-bold uppercase text-primary">Insurance · Risk · Claims</p>
               <h1 className="text-lg font-semibold text-ink">Gitvisha Insurance</h1>
               <p className="mt-3 max-w-4xl font-display text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl">Protecting What Matters.<br /><span className="text-primary">Securing What's Ahead.</span></p>
-              <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-                <p className="max-w-2xl text-sm leading-7 text-ink-soft sm:text-base">Thoughtful insurance broking and risk advisory to help businesses and individuals understand exposure, choose suitable protection, and navigate claims with confidence.</p>
-                <Button asChild size="lg" className="min-h-12 w-fit shrink-0"><a href="#contact">Get a Quote <ArrowRight /></a></Button>
+              <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+                <div className="max-w-2xl">
+                  <p className="text-sm leading-7 text-ink-soft sm:text-base">Thoughtful insurance broking and risk advisory to help businesses and individuals understand exposure, choose suitable protection, and navigate claims with confidence.</p>
+                  <Button asChild size="lg" className="mt-5 min-h-12 w-fit"><a href="#contact">Get a Quote <ArrowRight /></a></Button>
+                </div>
+                <RiskOrbit />
               </div>
             </div>
           </div>
