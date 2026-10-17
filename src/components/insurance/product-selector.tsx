@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, LifeBuoy, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { productCategories } from "@/lib/insurance/catalogue";
@@ -28,8 +28,5 @@ export function ProductSelector({ onEnquire }: { onEnquire: (requirement: string
         </div>
       </TabsContent>)}
     </Tabs>
-    <div className="mt-7 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-5 text-xs font-medium text-ink-soft">
-      {[{ icon: ShieldCheck, text: "Thoughtful risk advisory" }, { icon: Check, text: "Clear policy guidance" }, { icon: LifeBuoy, text: "Dedicated claims assistance" }].map(({ icon: Icon, text }) => <span className="flex items-center gap-2" key={text}><Icon aria-hidden="true" className="size-4 text-primary" />{text}</span>)}
-    </div>
   </div>;
 }

@@ -23,6 +23,7 @@ import {
   HeartPulse,
   Hotel,
   Landmark,
+  LifeBuoy,
   Mail,
   PackageCheck,
   Phone,
@@ -261,6 +262,12 @@ function HomePage() {
             </form>
           </div>
         </section>
+
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-border py-6 text-xs font-medium text-ink-soft">
+            {[{ icon: ShieldCheck, text: "Thoughtful risk advisory" }, { icon: Check, text: "Clear policy guidance" }, { icon: LifeBuoy, text: "Dedicated claims assistance" }].map(({ icon: Icon, text }) => <span className="flex items-center gap-2" key={text}><Icon aria-hidden="true" className="size-4 text-primary" />{text}</span>)}
+          </div>
+        </div>
       </div>
 
       <SiteFooter />
