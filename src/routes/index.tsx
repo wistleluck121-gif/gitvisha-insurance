@@ -132,6 +132,9 @@ function HomePage() {
           <div className="mx-auto max-w-7xl px-5 pb-8 pt-6 lg:px-8">
             <div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-lg font-semibold text-ink">What would you like to protect?</h2><a href="#solutions" className="flex items-center gap-2 text-xs font-semibold text-primary">Explore all solutions <ArrowRight className="size-4" /></a></div>
             <ProductSelector onEnquire={setRequirement} />
+            <div className="mt-7 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-5 text-xs font-medium text-ink-soft">
+              {[{ icon: ShieldCheck, text: "Thoughtful risk advisory" }, { icon: Check, text: "Clear policy guidance" }, { icon: LifeBuoy, text: "Dedicated claims assistance" }].map(({ icon: Icon, text }) => <span className="flex items-center gap-2" key={text}><Icon aria-hidden="true" className="size-4 text-primary" />{text}</span>)}
+            </div>
           </div>
         </section>
 
@@ -262,12 +265,6 @@ function HomePage() {
             </form>
           </div>
         </section>
-
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-border py-6 text-xs font-medium text-ink-soft">
-            {[{ icon: ShieldCheck, text: "Thoughtful risk advisory" }, { icon: Check, text: "Clear policy guidance" }, { icon: LifeBuoy, text: "Dedicated claims assistance" }].map(({ icon: Icon, text }) => <span className="flex items-center gap-2" key={text}><Icon aria-hidden="true" className="size-4 text-primary" />{text}</span>)}
-          </div>
-        </div>
       </div>
 
       <SiteFooter />
