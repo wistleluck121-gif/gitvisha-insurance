@@ -187,3 +187,22 @@
 }
 
 @layer base { a, button, input, select, textarea { scroll-margin-top: 6rem; } }
+
+/* Hero risk-orbit visual */
+@keyframes orbit-rotate {
+  to { transform: rotate(360deg); }
+}
+@keyframes orbit-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.orbit-spin { animation: orbit-rotate 26s linear infinite; }
+.orbit-spin-slow { animation: orbit-rotate 44s linear infinite; }
+.orbit-spin-rev { animation: orbit-rotate 34s linear infinite reverse; }
+.orbit-float { animation: orbit-float 6s ease-in-out infinite; }
+.orbit-float-rev { animation: orbit-float 7s ease-in-out infinite reverse; }
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin, .orbit-spin-slow, .orbit-spin-rev, .orbit-float, .orbit-float-rev {
+    animation: none;
+  }
+}
