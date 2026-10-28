@@ -10,6 +10,8 @@ import {
   Truck,
   Users,
   Wrench,
+  Sun,
+  Milestone,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -58,6 +60,13 @@ export const productCategories: {
     name: "Health & People",
     products: [
       {
+        name: "Health Insurance",
+        slug: "health-insurance",
+        detail: "Individual, family floater & critical illness",
+        requirement: "Health Insurance",
+        icon: HeartPulse,
+      },
+      {
         name: "Group Health Insurance",
         slug: "group-health-insurance",
         detail: "Health cover shaped around your team",
@@ -90,6 +99,20 @@ export const productCategories: {
         detail: "Projects, equipment & machinery",
         requirement: "Engineering Insurance",
         icon: Wrench,
+      },
+      {
+        name: "Solar Pumping Insurance",
+        slug: "solar-pumping-insurance",
+        detail: "Solar arrays, pumps & controller coverage",
+        requirement: "Engineering Insurance",
+        icon: Sun,
+      },
+      {
+        name: "Road Insurance",
+        slug: "road-insurance",
+        detail: "Highways, road contracts & corridor protection",
+        requirement: "Engineering Insurance",
+        icon: Milestone,
       },
       {
         name: "Liability Insurance",

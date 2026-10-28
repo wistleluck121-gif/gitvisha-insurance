@@ -438,24 +438,65 @@
 @media (max-width: 639px) {
   .risk-visual {
     width: 100%;
-    max-width: 360px;
-    max-height: none;
+    max-width: 220px !important;
+    max-height: 220px;
+    margin: 8px auto 0;
+  }
+  .risk-spark {
+    width: 6px;
+    height: 6px;
   }
   .risk-label {
-    gap: 6px;
-    padding: 9px 10px;
-    border-radius: 13px;
+    gap: 4px;
+    padding: 5px 8px;
+    border-radius: 10px;
+  }
+  .risk-label svg {
+    width: 13px;
+    height: 13px;
+  }
+  .risk-label strong {
+    font-size: 10px;
+  }
+  .risk-label small {
+    font-size: 8px;
   }
   .risk-label-top {
-    left: 0;
+    left: -4px;
+    top: 8%;
   }
   .risk-label-bottom {
-    right: 0;
+    right: -4px;
+    bottom: 12%;
   }
   .risk-caption {
-    bottom: 6%;
-    padding: 8px 13px;
-    font-size: 8px;
+    bottom: 0;
+    padding: 4px 10px;
+    font-size: 7px;
+    letter-spacing: 0.12em;
+  }
+}
+
+@media (max-width: 380px) {
+  .risk-visual {
+    max-width: 190px !important;
+    max-height: 190px;
+  }
+  .risk-label {
+    padding: 4px 6px;
+    gap: 3px;
+  }
+  .risk-label strong {
+    font-size: 9px;
+  }
+  .risk-label small {
+    font-size: 7.5px;
+  }
+  .risk-label-top {
+    left: -6px;
+  }
+  .risk-label-bottom {
+    right: -6px;
   }
 }
 
@@ -527,12 +568,18 @@
   }
 }
 
-/* Insurer marquee section: clean background, no colored glow */
+/* Insurer marquee section: clean background, enhanced height and spacing */
 .insurer-marquee-section {
   background: var(--color-card);
-  padding: 36px 0;
+  padding: 56px 0;
   overflow: hidden;
   border-bottom: 1px solid var(--color-border);
+}
+
+.insurer-marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 }
 
 .insurer-marquee {
@@ -541,6 +588,7 @@
   position: relative;
   isolation: isolate;
   background: transparent;
+  padding: 6px 0;
 }
 
 /* Neutral fade at both ends — no pink or other color tint */
@@ -551,13 +599,13 @@
   z-index: 2;
   top: 0;
   bottom: 0;
-  width: clamp(90px, 14%, 190px);
+  width: clamp(100px, 16%, 220px);
   pointer-events: none;
   background: linear-gradient(
     to right,
     var(--color-card) 0%,
-    color-mix(in srgb, var(--color-card) 78%, transparent) 34%,
-    color-mix(in srgb, var(--color-card) 34%, transparent) 68%,
+    color-mix(in srgb, var(--color-card) 85%, transparent) 34%,
+    color-mix(in srgb, var(--color-card) 40%, transparent) 68%,
     transparent 100%
   );
 }
@@ -574,7 +622,14 @@
 .insurer-marquee-track {
   display: flex;
   width: max-content;
-  animation: insurer-scroll 32s linear infinite;
+  animation: insurer-scroll 34s linear infinite;
+  will-change: transform;
+}
+
+.insurer-marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  animation: insurer-scroll-reverse 34s linear infinite;
   will-change: transform;
 }
 
@@ -582,25 +637,46 @@
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  gap: 64px;
-  padding-right: 64px;
+  gap: 84px;
+  padding-right: 84px;
 }
 
 .insurer-logo-item {
-  width: 130px;
-  height: 64px;
-  flex: 0 0 130px;
+  width: 220px;
+  height: 84px;
+  flex: 0 0 220px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 4px 8px;
+}
+
+.insurer-logo-item-wide {
+  width: 290px;
+  flex: 0 0 290px;
 }
 
 .insurer-logo-item img {
-  max-width: 100%;
-  max-height: 48px;
+  max-width: 95%;
+  max-height: 68px;
   width: auto;
   height: auto;
   object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.insurer-logo-item img.insurer-logo-large {
+  max-width: 100%;
+  max-height: 74px;
+  transform: scale(1.16);
+}
+
+.insurer-logo-item:hover img {
+  transform: scale(1.05);
+}
+
+.insurer-logo-item:hover img.insurer-logo-large {
+  transform: scale(1.22);
 }
 
 @keyframes insurer-scroll {
@@ -612,46 +688,94 @@
   }
 }
 
-.insurer-marquee:hover .insurer-marquee-track {
+@keyframes insurer-scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.insurer-marquee:hover .insurer-marquee-track,
+.insurer-marquee:hover .insurer-marquee-track-reverse {
   animation-play-state: paused;
 }
 
 @media (max-width: 640px) {
+  .insurer-marquee-section {
+    padding: 22px 0;
+  }
+
+  .insurer-marquee-container {
+    gap: 14px;
+  }
+
   .insurer-marquee-group {
     gap: 36px;
     padding-right: 36px;
   }
 
   .insurer-logo-item {
-    width: 100px;
-    height: 54px;
-    flex-basis: 100px;
+    width: 140px;
+    height: 52px;
+    flex-basis: 140px;
+  }
+
+  .insurer-logo-item-wide {
+    width: 195px;
+    flex-basis: 195px;
   }
 
   .insurer-logo-item img {
     max-height: 40px;
   }
 
-  .insurer-marquee-track {
-    animation-duration: 25s;
+  .insurer-logo-item img.insurer-logo-large {
+    max-height: 50px;
+    transform: scale(1.22);
+  }
+
+  .insurer-logo-item:hover img.insurer-logo-large {
+    transform: scale(1.26);
+  }
+
+  .insurer-marquee-track,
+  .insurer-marquee-track-reverse {
+    animation-duration: 26s;
   }
 
   .insurer-marquee::before,
   .insurer-marquee::after {
-    width: 70px;
+    width: 50px;
   }
+}
 
-  .insurer-marquee-section::before {
-    left: 8px;
+@media (max-width: 420px) {
+  .insurer-marquee-section {
+    padding: 16px 0;
   }
-
-  .insurer-marquee-section::after {
-    right: 8px;
+  .insurer-marquee-group {
+    gap: 24px;
+    padding-right: 24px;
+  }
+  .insurer-logo-item {
+    width: 120px;
+    height: 44px;
+    flex-basis: 120px;
+  }
+  .insurer-logo-item img {
+    max-height: 34px;
+  }
+  .insurer-marquee::before,
+  .insurer-marquee::after {
+    width: 40px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .insurer-marquee-track {
+  .insurer-marquee-track,
+  .insurer-marquee-track-reverse {
     animation: none;
   }
 }
@@ -1422,20 +1546,30 @@ textarea:focus-visible {
   line-height: 1.4;
   margin: 0 0 9px;
 }
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .gv-product-hero-grid {
-    gap: 18px;
-    grid-template-columns: 1fr 0.8fr;
-    min-height: 490px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    min-height: auto;
+    padding: 36px 0;
   }
   .gv-product-art {
-    transform: scale(0.9);
+    transform: none;
+    min-height: 330px;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
   }
   .gv-two-col,
   .gv-faq-layout,
   .gv-enquiry-grid,
   .gv-about-intro {
-    gap: 35px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .gv-info-grid,
+  .gv-values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .gv-claim-steps {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1447,108 +1581,329 @@ textarea:focus-visible {
   .gv-about-cta {
     align-items: flex-start;
     flex-direction: column;
+    gap: 24px;
   }
 }
+
 @media (max-width: 640px) {
   .gv-container {
-    width: calc(100% - 32px);
+    width: calc(100% - 28px);
   }
   .gv-product-hero-grid {
     grid-template-columns: 1fr;
-    gap: 0;
-    padding: 28px 0 34px;
+    gap: 14px;
+    padding: 16px 0 22px;
   }
   .gv-breadcrumb {
-    margin-bottom: 24px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    gap: 5px;
   }
   .gv-product-copy h1 {
-    font-size: clamp(36px, 10vw, 51px);
+    font-size: clamp(22px, 6.2vw, 30px);
+    margin: 8px 0 10px;
+    line-height: 1.22;
   }
-  .gv-product-art {
-    min-height: 315px;
-    transform: scale(0.92);
-    margin: 6px 0 -5px;
+  .gv-lead {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .gv-product-intro,
+  .gv-body-copy {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .gv-hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .gv-hero-actions .gv-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+  .gv-hero-actions .gv-text-link {
+    justify-content: center;
+    padding: 6px 0;
+  }
+  .gv-product-photo-art {
+    min-height: 190px;
+    transform: none;
+    margin: 6px auto 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  .gv-product-art:not(.gv-product-photo-art) {
+    min-height: 310px;
+    transform: none;
+    margin: 12px auto 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .gv-photo-frame {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
   }
   .gv-art-orbit-one {
-    width: 280px;
-    height: 280px;
+    width: 180px;
+    height: 180px;
   }
   .gv-art-orbit-two {
-    width: 220px;
-    height: 220px;
+    width: 140px;
+    height: 140px;
   }
-  .gv-art-card-top {
-    left: 0;
-    top: 18px;
+  .gv-art-shield {
+    width: 76px;
+    height: 76px;
   }
-  .gv-art-card-bottom {
-    right: 0;
-    bottom: 30px;
+  .gv-art-shield svg {
+    width: 44px;
+    height: 44px;
   }
-  .gv-art-card {
-    min-width: 200px;
-    padding: 11px;
+  .gv-art-card,
+  .gv-product-photo-art .gv-art-card {
+    min-width: unset;
+    max-width: calc(100% - 16px);
+    padding: 6px 10px;
+    gap: 6px;
+    border-radius: 8px;
+  }
+  .gv-art-card-top,
+  .gv-product-photo-art .gv-art-card-top {
+    top: 6px;
+    left: 6px;
+  }
+  .gv-art-card-bottom,
+  .gv-product-photo-art .gv-art-card-bottom {
+    bottom: 6px;
+    right: 6px;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-card {
+    max-width: min(calc(100% - 20px), 250px);
+    padding: 7px 11px;
+    gap: 7px;
+    border-radius: 9px;
+    z-index: 2;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-card-top {
+    top: 10px;
+    left: 8px;
+    right: auto;
+    bottom: auto;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-card-bottom {
+    bottom: 38px;
+    right: 8px;
+    left: auto;
+    top: auto;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-caption {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 92%;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--gmuted);
+    z-index: 2;
+  }
+  .gv-art-icon,
+  .gv-art-check {
+    width: 26px;
+    height: 26px;
+  }
+  .gv-art-icon svg,
+  .gv-art-check svg {
+    width: 15px;
+    height: 15px;
   }
   .gv-section {
-    padding: 58px 0;
+    padding: 28px 0;
   }
   .gv-info-grid,
   .gv-values-grid,
   .gv-product-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .gv-info-card,
+  .gv-value-card {
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+  .gv-info-card h3,
+  .gv-value-card h3 {
+    font-size: 14.5px;
+    margin: 4px 0 6px;
+  }
+  .gv-info-card p,
+  .gv-value-card p {
+    font-size: 12.5px;
+    line-height: 1.6;
   }
   .gv-two-col,
   .gv-faq-layout,
   .gv-enquiry-grid,
   .gv-about-intro {
     grid-template-columns: 1fr;
-    gap: 26px;
+    gap: 20px;
   }
   .gv-section-heading {
-    margin-bottom: 26px;
+    margin-bottom: 16px;
+  }
+  .gv-section-heading h2,
+  .gv-two-col h2,
+  .gv-faq-layout h2,
+  .gv-about-intro h2,
+  .gv-enquiry-grid > div:first-child h2 {
+    font-size: clamp(20px, 5.2vw, 25px);
+    margin: 6px 0 8px;
+    line-height: 1.25;
+  }
+  .gv-section-heading p,
+  .gv-about-intro p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 6px;
   }
   .gv-enquiry-section {
-    padding: 56px 0;
+    padding: 30px 0;
   }
   .gv-enquiry-form {
-    padding: 20px 16px;
+    padding: 16px 14px;
+    border-radius: 12px;
+  }
+  .gv-form-heading {
+    margin-bottom: 12px;
+    gap: 10px;
+  }
+  .gv-form-heading h3 {
+    font-size: 15px;
   }
   .gv-form-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .gv-form-grid input,
+  .gv-form-grid textarea,
+  .gv-form-grid select {
+    font-size: 16px;
+    height: 40px;
   }
   .gv-field-wide {
     grid-column: auto;
   }
-  .gv-claim-steps {
-    grid-template-columns: 1fr 1fr;
-  }
+  .gv-claim-steps,
   .gv-doc-grid,
   .gv-role-grid,
   .gv-process-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .gv-consideration-list > div {
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .gv-consideration-list p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .gv-faq-list summary {
+    padding: 12px 0;
+    gap: 12px;
+    font-size: 13.5px;
+  }
+  .gv-faq-list details > p {
+    margin: 0 0 14px 0;
+    font-size: 12.5px;
+    line-height: 1.6;
   }
   .gv-cta-actions {
     width: 100%;
+    flex-direction: column;
+    gap: 10px;
   }
   .gv-cta-actions .gv-btn {
-    flex: 1;
+    width: 100%;
   }
   .gv-claim-note {
-    padding: 19px 15px;
-  }
-}
-@media (max-width: 390px) {
-  .gv-claim-steps,
-  .gv-doc-grid,
-  .gv-role-grid {
-    grid-template-columns: 1fr;
-  }
-  .gv-hero-actions {
-    align-items: flex-start;
+    padding: 14px;
+    border-radius: 10px;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
+  }
+  .gv-claim-note h3 {
+    font-size: 14px;
+  }
+  .gv-claim-note p {
+    font-size: 12px;
+    line-height: 1.5;
   }
 }
+
+@media (max-width: 380px) {
+  .gv-container {
+    width: calc(100% - 20px);
+  }
+  .gv-photo-frame {
+    height: 160px;
+  }
+  .gv-product-photo-art {
+    min-height: 170px;
+  }
+  .gv-product-art:not(.gv-product-photo-art) {
+    min-height: 295px;
+  }
+  .gv-section {
+    padding: 22px 0;
+  }
+  .gv-art-card,
+  .gv-product-photo-art .gv-art-card {
+    padding: 5px 8px;
+    gap: 5px;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-card {
+    max-width: min(calc(100% - 16px), 235px);
+    padding: 5px 8px;
+    gap: 6px;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-card-top {
+    top: 8px;
+    left: 6px;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-card-bottom {
+    bottom: 34px;
+    right: 6px;
+  }
+  .gv-product-art:not(.gv-product-photo-art) .gv-art-caption {
+    bottom: 6px;
+    font-size: 7.5px;
+    letter-spacing: 0.14em;
+  }
+  .gv-art-card b {
+    font-size: 10px;
+  }
+  .gv-art-card small {
+    font-size: 8px;
+  }
+  .gv-art-icon,
+  .gv-art-check {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gv-page * {
     transition: none !important;
@@ -1634,30 +1989,26 @@ textarea:focus-visible {
   padding: 12px;
   border-radius: 50%;
 }
+
 @media (max-width: 640px) {
-  .gv-product-photo-art {
-    min-height: 300px;
-    transform: none;
-    margin: 8px 0 0;
+  .gv-careers-logo {
+    width: 110px;
+    height: 110px;
   }
-  .gv-photo-frame {
-    width: 100%;
-    height: 270px;
-    border-radius: 15px;
-  }
-  .gv-product-photo-art .gv-art-card-top {
-    top: 6px;
-    left: -2px;
-  }
-  .gv-product-photo-art .gv-art-card-bottom {
-    bottom: 0;
-    right: -2px;
-  }
-  .gv-product-photo-art .gv-art-card {
-    min-width: 190px;
+  .gv-careers-logo img {
+    padding: 8px;
   }
 }
 
+@media (max-width: 380px) {
+  .gv-careers-logo {
+    width: 95px;
+    height: 95px;
+  }
+  .gv-careers-logo img {
+    padding: 6px;
+  }
+}
 
 /* Shared site chrome on Careers and product pages; consistent Gitvisha pink accent. */
 .home-pink-accent {
@@ -1681,8 +2032,4 @@ textarea:focus-visible {
 }
 .gv-page > main {
   display: block;
-}
-@media (max-width: 760px) {
-  .gv-product-photo-art { min-height: 310px; }
-  .gv-photo-frame { height: 280px; }
 }

@@ -11,6 +11,10 @@ describe("App routing", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
     expect(router.matchRoutes("/car-insurance").at(-1)?.routeId).toBe("/car-insurance");
   });
+  it("matches the dedicated health insurance page", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/health-insurance").at(-1)?.routeId).toBe("/health-insurance");
+  });
   it("matches a page for / instead of falling back to not found", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
 

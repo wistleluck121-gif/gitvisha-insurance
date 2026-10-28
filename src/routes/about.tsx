@@ -1,5 +1,179 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Compass, Handshake, SearchCheck, ShieldCheck } from "lucide-react";
-export const Route=createFileRoute("/about")({component:AboutPage,head:()=>({meta:[{title:"About Gitvisha | Insurance Broking & Risk Advisory"},{name:"description",content:"Learn about Gitvisha's approach to insurance broking, risk advisory and claims support."}]})});
-const values=[{icon:SearchCheck,title:"Understand before recommending",copy:"We begin with your operations, assets, people and priorities—not a one-size-fits-all answer."},{icon:Compass,title:"Make complexity clearer",copy:"We help organise the questions, compare relevant options and identify terms that deserve attention."},{icon:Handshake,title:"Stay involved",copy:"From policy discussions to claims coordination, we aim to be a steady point of contact."}];
-function AboutPage(){return <main className="gv-page"><section className="gv-product-hero"><div className="gv-container gv-product-hero-grid"><div className="gv-product-copy"><div className="gv-breadcrumb"><Link to="/">Home</Link><span>/</span><strong>About Gitvisha</strong></div><span className="gv-kicker"><i className="gv-kicker-dot"/> ABOUT GITVISHA</span><h1>Insurance should bring <span className="gv-inline-gradient">clarity, not complexity.</span></h1><p className="gv-lead">A thoughtful approach to insurance broking and risk advisory.</p><p className="gv-product-intro">Every organisation has a different combination of assets, people, contracts and operational risks. Our approach begins by understanding those details and helping clients explore insurance options that fit their needs.</p><div className="gv-hero-actions"><Link to="/" className="gv-btn gv-btn-primary">Explore solutions <ArrowRight size={17}/></Link><Link to="/claims" className="gv-text-link">Claims assistance <ArrowRight size={16}/></Link></div></div><div className="gv-product-art"><div className="gv-art-orbit gv-art-orbit-one"/><div className="gv-art-orbit gv-art-orbit-two"/><div className="gv-art-shield"><ShieldCheck size={76}/><span>G</span></div><div className="gv-art-card gv-art-card-top"><span className="gv-art-icon"><Compass size={24}/></span><span><b>Business-first</b><small>Context before cover</small></span></div><div className="gv-art-card gv-art-card-bottom"><span className="gv-art-check"><Handshake size={21}/></span><span><b>People-led support</b><small>Through the journey</small></span></div><p className="gv-art-caption">UNDERSTAND · ADVISE · SUPPORT</p></div></div></section><section className="gv-section"><div className="gv-container gv-about-intro"><div><span className="gv-kicker">OUR PURPOSE</span><h2>Better conversations lead to <span>better-informed decisions.</span></h2></div><div><p className="gv-body-copy">Insurance can be difficult to navigate when wordings, exclusions, deductibles and business requirements intersect. Gitvisha aims to make that conversation more structured and useful.</p><p className="gv-body-copy">We work with clients to understand what they need to protect, discuss relevant options and help coordinate information throughout the insurance lifecycle. Final coverage depends on insurer acceptance and issued policy terms.</p></div></div></section><section className="gv-section gv-section-tint"><div className="gv-container"><div className="gv-section-heading"><span className="gv-kicker">HOW WE WORK</span><h2>Three principles behind <span>our approach.</span></h2></div><div className="gv-values-grid">{values.map(({icon:Icon,title,copy},i)=><article className="gv-value-card" key={title}><span className="gv-value-icon"><Icon size={23}/></span><span className="gv-number">0{i+1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section><section className="gv-enquiry-section"><div className="gv-container gv-about-cta"><div><span className="gv-kicker gv-kicker-light">START A CONVERSATION</span><h2>Let’s understand what <span>you need to protect.</span></h2><p>Share your requirement and start a practical discussion with the Gitvisha team.</p></div><div className="gv-cta-actions"><Link to="/" className="gv-btn gv-btn-primary">Explore insurance <ArrowRight size={17}/></Link><Link to="/claims" className="gv-btn gv-btn-light">Claims assistance <ArrowRight size={17}/></Link></div></div></section></main>}
+import { ArrowRight, Compass, Handshake, SearchCheck } from "lucide-react";
+import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+
+export const Route = createFileRoute("/about")({
+  component: AboutPage,
+  head: () => ({
+    meta: [
+      { title: "About Gitvisha | Insurance Broking & Risk Advisory" },
+      {
+        name: "description",
+        content:
+          "Learn about Gitvisha's approach to insurance broking, risk advisory and claims support.",
+      },
+    ],
+  }),
+});
+
+const values = [
+  {
+    icon: SearchCheck,
+    title: "Understand before recommending",
+    copy: "We begin with your operations, assets, people and priorities—not a one-size-fits-all answer.",
+  },
+  {
+    icon: Compass,
+    title: "Make complexity clearer",
+    copy: "We help organise the questions, compare relevant options and identify terms that deserve attention.",
+  },
+  {
+    icon: Handshake,
+    title: "Stay involved",
+    copy: "From policy discussions to claims coordination, we aim to be a steady point of contact.",
+  },
+];
+
+function AboutPage() {
+  return (
+    <div className="gv-page">
+      <SiteHeader />
+      <main>
+        <section className="gv-product-hero">
+          <div className="gv-container gv-product-hero-grid">
+            <div className="gv-product-copy">
+              <div className="gv-breadcrumb">
+                <Link to="/">Home</Link>
+                <span>/</span>
+                <strong>About Gitvisha</strong>
+              </div>
+              <span className="gv-kicker">
+                <i className="gv-kicker-dot" /> ABOUT GITVISHA
+              </span>
+              <h1>
+                Insurance should bring{" "}
+                <span className="gv-inline-gradient">clarity, not complexity.</span>
+              </h1>
+              <p className="gv-lead">
+                A thoughtful approach to insurance broking and risk advisory.
+              </p>
+              <p className="gv-product-intro">
+                Every organisation has a different combination of assets, people, contracts and
+                operational risks. Our approach begins by understanding those details and helping
+                clients explore insurance options that fit their needs.
+              </p>
+              <div className="gv-hero-actions">
+                <Link to="/" className="gv-btn gv-btn-primary">
+                  Explore solutions <ArrowRight size={17} />
+                </Link>
+                <Link to="/claims" className="gv-text-link">
+                  Claims assistance <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
+
+            <div className="gv-product-art">
+              <div className="gv-art-orbit gv-art-orbit-one" />
+              <div className="gv-art-orbit gv-art-orbit-two" />
+              <div className="gv-art-shield gv-careers-logo">
+                <img
+                  src={"/gitvisha-logo.webp"}
+                  alt="Gitvisha logo"
+                  width={116}
+                  height={116}
+                  decoding="async"
+                />
+              </div>
+              <div className="gv-art-card gv-art-card-top">
+                <span className="gv-art-icon">
+                  <Compass size={24} />
+                </span>
+                <span>
+                  <b>Business-first</b>
+                  <small>Context before cover</small>
+                </span>
+              </div>
+              <div className="gv-art-card gv-art-card-bottom">
+                <span className="gv-art-check">
+                  <Handshake size={21} />
+                </span>
+                <span>
+                  <b>People-led support</b>
+                  <small>Through the journey</small>
+                </span>
+              </div>
+              <p className="gv-art-caption">UNDERSTAND · ADVISE · SUPPORT</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="gv-section">
+          <div className="gv-container gv-about-intro">
+            <div>
+              <span className="gv-kicker">OUR PURPOSE</span>
+              <h2>
+                Better conversations lead to <span>better-informed decisions.</span>
+              </h2>
+            </div>
+            <div>
+              <p className="gv-body-copy">
+                Insurance can be difficult to navigate when wordings, exclusions, deductibles and
+                business requirements intersect. Gitvisha aims to make that conversation more
+                structured and useful.
+              </p>
+              <p className="gv-body-copy">
+                We work with clients to understand what they need to protect, discuss relevant
+                options and help coordinate information throughout the insurance lifecycle. Final
+                coverage depends on insurer acceptance and issued policy terms.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="gv-section gv-section-tint">
+          <div className="gv-container">
+            <div className="gv-section-heading">
+              <span className="gv-kicker">HOW WE WORK</span>
+              <h2>
+                Three principles behind <span>our approach.</span>
+              </h2>
+            </div>
+            <div className="gv-values-grid">
+              {values.map(({ icon: Icon, title, copy }, i) => (
+                <article className="gv-value-card" key={title}>
+                  <span className="gv-value-icon">
+                    <Icon size={23} />
+                  </span>
+                  <span className="gv-number">0{i + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="gv-enquiry-section">
+          <div className="gv-container gv-about-cta">
+            <div>
+              <span className="gv-kicker gv-kicker-light">START A CONVERSATION</span>
+              <h2>
+                Let’s understand what <span>you need to protect.</span>
+              </h2>
+              <p>Share your requirement and start a practical discussion with the Gitvisha team.</p>
+            </div>
+            <div className="gv-cta-actions">
+              <Link to="/" className="gv-btn gv-btn-primary">
+                Explore insurance <ArrowRight size={17} />
+              </Link>
+              <Link to="/claims" className="gv-btn gv-btn-light">
+                Claims assistance <ArrowRight size={17} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}

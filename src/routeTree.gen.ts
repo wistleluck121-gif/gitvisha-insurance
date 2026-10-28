@@ -14,6 +14,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CarInsuranceRouteImport } from './routes/car-insurance'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ClaimsRouteImport } from './routes/claims'
+import { Route as HealthInsuranceRouteImport } from './routes/health-insurance'
+import { Route as IndustriesIndexRouteImport } from './routes/industries/index'
+import { Route as IndustriesIndustrySlugRouteImport } from './routes/industries/$industrySlug'
 import { Route as ProductsProductSlugRouteImport } from './routes/products/$productSlug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +44,21 @@ const ClaimsRoute = ClaimsRouteImport.update({
   path: '/claims',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HealthInsuranceRoute = HealthInsuranceRouteImport.update({
+  id: '/health-insurance',
+  path: '/health-insurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/industries/',
+  path: '/industries/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndustrySlugRoute = IndustriesIndustrySlugRouteImport.update({
+  id: '/industries/$industrySlug',
+  path: '/industries/$industrySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsProductSlugRoute = ProductsProductSlugRouteImport.update({
   id: '/products/$productSlug',
   path: '/products/$productSlug',
@@ -53,7 +71,10 @@ export interface FileRoutesByFullPath {
   '/car-insurance': typeof CarInsuranceRoute
   '/careers': typeof CareersRoute
   '/claims': typeof ClaimsRoute
+  '/health-insurance': typeof HealthInsuranceRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
   '/products/$productSlug': typeof ProductsProductSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +82,10 @@ export interface FileRoutesByTo {
   '/car-insurance': typeof CarInsuranceRoute
   '/careers': typeof CareersRoute
   '/claims': typeof ClaimsRoute
+  '/health-insurance': typeof HealthInsuranceRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
   '/products/$productSlug': typeof ProductsProductSlugRoute
+  '/industries': typeof IndustriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,7 +94,10 @@ export interface FileRoutesById {
   '/car-insurance': typeof CarInsuranceRoute
   '/careers': typeof CareersRoute
   '/claims': typeof ClaimsRoute
+  '/health-insurance': typeof HealthInsuranceRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
   '/products/$productSlug': typeof ProductsProductSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -80,7 +107,10 @@ export interface FileRouteTypes {
     | '/car-insurance'
     | '/careers'
     | '/claims'
+    | '/health-insurance'
+    | '/industries/$industrySlug'
     | '/products/$productSlug'
+    | '/industries/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -88,7 +118,10 @@ export interface FileRouteTypes {
     | '/car-insurance'
     | '/careers'
     | '/claims'
+    | '/health-insurance'
+    | '/industries/$industrySlug'
     | '/products/$productSlug'
+    | '/industries'
   id:
     | '__root__'
     | '/'
@@ -96,7 +129,10 @@ export interface FileRouteTypes {
     | '/car-insurance'
     | '/careers'
     | '/claims'
+    | '/health-insurance'
+    | '/industries/$industrySlug'
     | '/products/$productSlug'
+    | '/industries/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,7 +141,10 @@ export interface RootRouteChildren {
   CarInsuranceRoute: typeof CarInsuranceRoute
   CareersRoute: typeof CareersRoute
   ClaimsRoute: typeof ClaimsRoute
+  HealthInsuranceRoute: typeof HealthInsuranceRoute
+  IndustriesIndustrySlugRoute: typeof IndustriesIndustrySlugRoute
   ProductsProductSlugRoute: typeof ProductsProductSlugRoute
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -145,6 +184,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClaimsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/health-insurance': {
+      id: '/health-insurance'
+      path: '/health-insurance'
+      fullPath: '/health-insurance'
+      preLoaderRoute: typeof HealthInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/industries'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/$industrySlug': {
+      id: '/industries/$industrySlug'
+      path: '/industries/$industrySlug'
+      fullPath: '/industries/$industrySlug'
+      preLoaderRoute: typeof IndustriesIndustrySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/$productSlug': {
       id: '/products/$productSlug'
       path: '/products/$productSlug'
@@ -161,7 +221,10 @@ const rootRouteChildren: RootRouteChildren = {
   CarInsuranceRoute: CarInsuranceRoute,
   CareersRoute: CareersRoute,
   ClaimsRoute: ClaimsRoute,
+  HealthInsuranceRoute: HealthInsuranceRoute,
+  IndustriesIndustrySlugRoute: IndustriesIndustrySlugRoute,
   ProductsProductSlugRoute: ProductsProductSlugRoute,
+  IndustriesIndexRoute: IndustriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

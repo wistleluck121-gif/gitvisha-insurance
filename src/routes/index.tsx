@@ -1,14 +1,10 @@
-
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { ProductSelector } from "@/components/insurance/product-selector";
-import constructionAsset from "@/assets/construction.webp.asset.json";
-import logisticsAsset from "@/assets/logistics.webp.asset.json";
-import industryAsset from "@/assets/industry.webp.asset.json";
-import industrySmall from "@/assets/industry-small.webp.asset.json";
-import constructionSmall from "@/assets/construction-small.webp.asset.json";
-import logisticsSmall from "@/assets/logistics-small.webp.asset.json";
+import engineeringImg from "@/assets/products/engineering.jpg";
+import propertyFireImg from "@/assets/products/property-fire.jpg";
+import marineImg from "@/assets/products/marine.jpg";
 import { strengths } from "@/lib/insurance/shared";
 import sbiLogo from "@/assets/sbi.webp";
 import iciciLogo from "@/assets/icici.webp";
@@ -17,26 +13,33 @@ import tataLogo from "@/assets/TATA.webp";
 import kotakLogo from "@/assets/kotak.webp";
 import starHealthLogo from "@/assets/starhealth.webp";
 import iffcoTokioLogo from "@/assets/iffcotokio.webp";
+import newIndiaLogo from "@/assets/newindia.png";
+import unitedIndiaLogo from "@/assets/unitedindia.jpg";
+import orientalLogo from "@/assets/oriental.png";
+import nationalLogo from "@/assets/national.png";
 import { useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Building2,
   Check,
+  CheckCircle2,
   ChevronRight,
   CircleCheck,
+  Clock,
   ClipboardCheck,
   FileSearch,
   Flame,
   HeartPulse,
-  Hotel,
   Landmark,
   Mail,
-  PackageCheck,
   Phone,
+  PhoneCall,
   Scale,
+  Server,
   ShieldCheck,
   Ship,
   Store,
+  Sun,
   Truck,
   Warehouse,
   Wrench,
@@ -47,13 +50,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import sbi from "@/assets/sbi.webp";
-import icici from "@/assets/icici.webp";
-import hdfc from "@/assets/hdfc.webp";
-import tata from "@/assets/TATA.webp";
-import kotak from "@/assets/kotak.webp";
-import starHealth from "@/assets/starhealth.webp";
-import iffcoTokio from "@/assets/iffcotokio.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,8 +66,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:description",
-        content:
-          "Insurance and risk advisory shaped around what matters to you.",
+        content: "Insurance and risk advisory shaped around what matters to you.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -82,122 +77,135 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-type IconItem = {
+type SolutionItem = {
   title: string;
   description: string;
   icon: LucideIcon;
+  slug?: string;
+  isDedicated?: boolean;
+  to?: "/car-insurance" | "/health-insurance";
+  highlight: string;
 };
 
-const solutions: IconItem[] = [
+const solutions: SolutionItem[] = [
   {
     title: "Property & Fire Insurance",
-    description:
-      "Protection for buildings, stock, equipment, and operating assets.",
+    description: "Protection for factory buildings, stock, machinery, and commercial real estate.",
     icon: Flame,
+    slug: "property-fire-insurance",
+    highlight: "SFSP & Reinstatement Value",
   },
   {
     title: "Engineering Insurance",
     description:
-      "Coverage for projects, machinery, installation, and operational risks.",
+      "Coverage for contractors all risks (CAR), erection (EAR), and machinery breakdown.",
     icon: Wrench,
+    slug: "engineering-insurance",
+    highlight: "CAR / EAR & Machinery",
   },
   {
-    title: "Marine Insurance",
+    title: "Marine & Transit Insurance",
     description:
-      "Transit and cargo protection across supply chain movements.",
+      "Inland transit and sea cargo protection across domestic and global supply chains.",
     icon: Ship,
+    slug: "marine-insurance",
+    highlight: "ICC-A & Transit All Risks",
   },
   {
-    title: "Liability Insurance",
+    title: "Liability & Indemnity",
     description:
-      "Considered cover for legal liabilities and third-party exposures.",
+      "Considered protection for public liability, product liability, and directors & officers (D&O).",
     icon: Scale,
+    slug: "liability-insurance",
+    highlight: "Commercial & Third-Party",
   },
   {
-    title: "Motor Insurance",
+    title: "Car & Motor Insurance",
     description:
-      "Protection for commercial fleets and individual vehicles.",
+      "Comprehensive, own-damage, zero-depreciation, and third-party protection for cars and fleets.",
     icon: Truck,
+    isDedicated: true,
+    to: "/car-insurance",
+    highlight: "Zero-Dep & Engine Protect",
   },
   {
-    title: "Group Health & Personal Accident",
+    title: "Health & Group Mediclaim",
     description:
-      "Employee-focused health and accident protection solutions.",
+      "Individual, family floater, and corporate group health (GMC) with cashless hospital access.",
     icon: HeartPulse,
+    isDedicated: true,
+    to: "/health-insurance",
+    highlight: "No Room-Rent Cap & 80D",
   },
   {
     title: "Business Interruption",
     description:
-      "Support against insured disruptions affecting business continuity.",
+      "Support for continuing fixed costs, loan EMIs, and lost gross profits following insured losses.",
     icon: Zap,
+    slug: "business-interruption-insurance",
+    highlight: "Standing Charges & Profit",
   },
   {
-    title: "Specialty & Corporate Risks",
+    title: "Corporate & Specialty Risks",
     description:
-      "Structured solutions for complex and evolving exposures.",
+      "Bespoke risk management solutions for cyber liability, trade credit, and contractual indemnities.",
     icon: ShieldCheck,
+    slug: "corporate-specialty-risks",
+    highlight: "Tailored Master Contracts",
   },
 ];
 
 const industries = [
-  { title: "Manufacturing", icon: Building2 },
-  { title: "Infrastructure & Construction", icon: Landmark },
-  { title: "Logistics & Warehousing", icon: Warehouse },
-  { title: "Retail & Commercial", icon: Store },
-  { title: "Hospitality", icon: Hotel },
-  { title: "SMEs & Corporate", icon: PackageCheck },
+  { title: "Manufacturing", slug: "manufacturing", icon: Building2 },
+  { title: "Infrastructure & Construction", slug: "infrastructure-construction", icon: Landmark },
+  { title: "Renewable Energy & Solar", slug: "renewable-energy-solar", icon: Sun },
+  { title: "Logistics & Warehousing", slug: "logistics-warehousing", icon: Warehouse },
+  { title: "IT, Tech & Corporate", slug: "it-tech-corporate", icon: Server },
+  { title: "Healthcare & Pharmaceuticals", slug: "healthcare-pharmaceuticals", icon: HeartPulse },
+  { title: "Retail, Hospitality & Commercial", slug: "retail-hospitality", icon: Store },
 ];
 
 const claimSteps = [
   {
     number: "01",
-    title: "Intimate",
-    detail: "Notify us about the incident and immediate circumstances.",
-    icon: Phone,
+    title: "Intimate & Verify",
+    detail:
+      "Immediate loss notification to the insurer. We review your policy schedule, active endorsements, and eligibility.",
+    highlight: "Timeline Compliance",
+    icon: PhoneCall,
   },
   {
     number: "02",
-    title: "Document",
-    detail: "We help organise the relevant information and documents.",
+    title: "Preserve & Document",
+    detail:
+      "Guided checklists for photographic evidence, FIR/survey documents, invoices, and loss estimates.",
+    highlight: "Documentation Advocacy",
     icon: ClipboardCheck,
   },
   {
     number: "03",
-    title: "Assess",
-    detail: "Coordinate with the involved parties through the assessment.",
+    title: "Surveyor Liaison",
+    detail:
+      "Coordination with IRDAI-licensed independent surveyors for site inspection and fair damage valuation.",
+    highlight: "Fair Assessment",
     icon: FileSearch,
   },
   {
     number: "04",
-    title: "Resolve",
+    title: "Settlement & Release",
     detail:
-      "Support clear communication through the claim's conclusion.",
-    icon: CircleCheck,
+      "Active escalation with insurer claims management desks through approval, DV generation, and disbursement.",
+    highlight: "Timely Settlement",
+    icon: ShieldCheck,
   },
 ];
 
-function SectionIntro({
-  eyebrow,
-  title,
-  copy,
-}: {
-  eyebrow: string;
-  title: string;
-  copy?: string;
-}) {
+function SectionIntro({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
   return (
     <div className="max-w-2xl">
-      <p className="mb-4 text-xs font-bold uppercase text-primary">
-        {eyebrow}
-      </p>
-      <h2 className="text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-        {title}
-      </h2>
-      {copy && (
-        <p className="mt-5 max-w-xl text-base leading-7 text-ink-soft">
-          {copy}
-        </p>
-      )}
+      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary sm:mb-4">{eyebrow}</p>
+      <h2 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl lg:text-4xl">{title}</h2>
+      {copy && <p className="mt-3 text-xs leading-relaxed text-ink-soft sm:mt-5 sm:text-sm sm:leading-7">{copy}</p>}
     </div>
   );
 }
@@ -250,7 +258,7 @@ function RiskIntelligenceVisual() {
   );
 }
 
-const insurerLogos = [
+const marqueeRow1 = [
   { name: "SBI General Insurance", src: sbiLogo },
   { name: "ICICI Lombard", src: iciciLogo },
   { name: "HDFC ERGO", src: hdfcLogo },
@@ -260,9 +268,22 @@ const insurerLogos = [
   { name: "IFFCO-Tokio General Insurance", src: iffcoTokioLogo },
 ];
 
+const marqueeRow2 = [
+  { name: "The New India Assurance", src: newIndiaLogo },
+  { name: "United India Insurance", src: unitedIndiaLogo, isWide: true },
+  { name: "The Oriental Insurance Company", src: orientalLogo },
+  { name: "National Insurance", src: nationalLogo },
+  { name: "The New India Assurance", src: newIndiaLogo },
+  { name: "United India Insurance", src: unitedIndiaLogo, isWide: true },
+  { name: "The Oriental Insurance Company", src: orientalLogo },
+  { name: "National Insurance", src: nationalLogo },
+];
+
 function HomePage() {
   const [submitted, setSubmitted] = useState(false);
   const [requirement, setRequirement] = useState("");
+  const [mailtoHref, setMailtoHref] = useState("");
+  const [showAllSolutions, setShowAllSolutions] = useState(false);
 
   function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -273,9 +294,33 @@ function HomePage() {
       return;
     }
 
+    const d = new FormData(form);
+    const name = d.get("name") || "";
+    const phone = d.get("phone") || "";
+    const email = d.get("email") || "";
+    const company = d.get("company") || "Not specified";
+    const req = d.get("requirement") || requirement || "General Enquiry";
+    const timeline = d.get("timeline") || "Immediate";
+    const message = d.get("message") || "";
+
+    const mailtoBody = encodeURIComponent(
+      `CONSULTATION & RISK ENQUIRY — GITVISHA\n` +
+        `-----------------------------------------\n` +
+        `Name: ${name}\n` +
+        `Phone: ${phone}\n` +
+        `Email: ${email}\n` +
+        `Company / Asset: ${company}\n` +
+        `Insurance Category: ${req}\n` +
+        `Timeline / Priority: ${timeline}\n\n` +
+        `Requirement Details:\n${message}\n` +
+        `-----------------------------------------\n` +
+        `Submitted via gitvisha.com Consultation Desk`,
+    );
+
+    const generatedMailto = `mailto:info@gitvisha.com?subject=${encodeURIComponent("Insurance Enquiry — " + req + " (" + name + ")")}&body=${mailtoBody}`;
+    setMailtoHref(generatedMailto);
     setSubmitted(true);
-    form.reset();
-    setRequirement("");
+    window.location.href = generatedMailto;
   }
 
   return (
@@ -283,36 +328,28 @@ function HomePage() {
       <SiteHeader />
 
       <div>
-        <section
-          id="home"
-          className="scroll-mt-20 border-b border-border bg-secondary"
-        >
+        <section id="home" className="scroll-mt-20 border-b border-border bg-secondary">
           <div className="relative isolate overflow-hidden border-b border-border bg-background">
-           
             <div className="absolute inset-0 -z-10 bg-background/95" />
 
-            <div className="mx-auto grid max-w-7xl items-center gap-4 px-5 py-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:px-8 lg:py-3">
+            <div className="mx-auto grid max-w-7xl items-center gap-3 px-4 py-4 sm:gap-4 sm:px-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:px-8 lg:py-3">
               <div className="relative z-10">
-                <p className="mb-3 text-xs font-bold uppercase tracking-wide text-primary">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wide text-primary sm:mb-3">
                   Insurance · Risk · Claims
                 </p>
 
-                <h1 className="text-lg font-semibold text-ink">
-                  Gitvisha Insurance
-                </h1>
+                <h1 className="text-base font-semibold text-ink sm:text-lg">Gitvisha Insurance</h1>
 
-                <p className="mt-3 max-w-3xl font-display text-4xl font-semibold leading-[1.15] text-ink sm:text-5xl">
+                <p className="mt-2 max-w-3xl font-display text-2xl font-semibold leading-tight text-ink sm:mt-3 sm:text-4xl lg:text-5xl">
                   Protecting What Matters.
                   <br />
-                  <span className="home-pink-accent">
-                    Securing What&apos;s Ahead.
-                  </span>
+                  <span className="home-pink-accent">Securing What&apos;s Ahead.</span>
                 </p>
 
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-ink-soft sm:text-base">
-                  Thoughtful insurance broking and risk advisory to help
-                  businesses and individuals understand exposure, choose
-                  suitable protection, and navigate claims with confidence.
+                <p className="mt-3 max-w-2xl text-xs leading-relaxed text-ink-soft sm:mt-5 sm:text-sm md:text-base sm:leading-7">
+                  Thoughtful insurance broking and risk advisory to help businesses and individuals
+                  understand exposure, choose suitable protection, and navigate claims with
+                  confidence.
                 </p>
               </div>
 
@@ -320,146 +357,199 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mx-auto max-w-7xl px-5 pb-8 pt-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold text-ink">
-                What would you like to protect?
-              </h2>
+          <div className="mx-auto max-w-7xl px-4 pb-6 pt-5 sm:px-5 sm:pb-8 sm:pt-6 lg:px-8">
+            <div className="flex flex-wrap items-center justify-between gap-2.5">
+              <h2 className="text-base font-semibold text-ink sm:text-lg">What would you like to protect?</h2>
               <a
                 href="#solutions"
-                className="flex items-center gap-2 text-xs font-semibold text-primary"
+                className="flex items-center gap-1.5 text-xs font-semibold text-primary"
               >
-                Explore all solutions <ArrowRight className="size-4" />
+                Explore all solutions <ArrowRight className="size-3.5" />
               </a>
             </div>
             <ProductSelector onEnquire={setRequirement} />
-
           </div>
         </section>
 
-        <section
-          aria-label="Insurance companies"
-          className="insurer-marquee-section"
-        >
+        <section aria-label="Insurance companies" className="insurer-marquee-section">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Insurance companies
+            <p className="mb-8 text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Insurance Companies &amp; Underwriting Partners
             </p>
 
-            <div className="insurer-marquee">
-              <div className="insurer-marquee-track">
-                {[0, 1].map((copy) => (
-                  <div
-                    className="insurer-marquee-group"
-                    key={copy}
-                    aria-hidden={copy === 1}
-                  >
-                    {insurerLogos.map((logo) => (
-                      <div className="insurer-logo-item" key={logo.name}>
-                        <img
-                          src={logo.src}
-                          alt={copy === 0 ? logo.name : ""}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ))}
+            <div className="insurer-marquee-container">
+              {/* Row 1: Forward scroll */}
+              <div className="insurer-marquee">
+                <div className="insurer-marquee-track">
+                  {[0, 1].map((copy) => (
+                    <div className="insurer-marquee-group" key={copy} aria-hidden={copy === 1}>
+                      {marqueeRow1.map((logo) => (
+                        <div className="insurer-logo-item" key={logo.name}>
+                          <img
+                            src={logo.src}
+                            alt={copy === 0 ? logo.name : ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Row 2: Reverse scroll */}
+              <div className="insurer-marquee">
+                <div className="insurer-marquee-track-reverse">
+                  {[0, 1].map((copy) => (
+                    <div className="insurer-marquee-group" key={copy} aria-hidden={copy === 1}>
+                      {marqueeRow2.map((logo, index) => (
+                        <div
+                          className={`insurer-logo-item ${logo.isWide ? "insurer-logo-item-wide" : ""}`}
+                          key={`${logo.name}-${index}`}
+                        >
+                          <img
+                            src={logo.src}
+                            alt={copy === 0 ? logo.name : ""}
+                            loading="lazy"
+                            decoding="async"
+                            className={logo.isWide ? "insurer-logo-large" : ""}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="solutions"
-          className="scroll-mt-20 bg-background py-14 lg:py-20"
-        >
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <SectionIntro
-              eyebrow="Insurance solutions"
-              title="Protection structured around real-world risk."
-              copy="From core business assets to complex corporate exposures, we help identify and evaluate suitable coverage options."
-            />
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
-              {solutions.map(({ title, description, icon: Icon }, index) => (
-                <article
-                  key={title}
-                  className="group relative rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary sm:p-6"
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="text-primary">
-                      <Icon className="size-5" strokeWidth={1.7} />
-                    </span>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      0{index + 1}
-                    </span>
-                  </div>
-                  <h3 className="mt-5 text-base font-semibold text-ink">
-                    {title === "Motor Insurance" ? (
-                      <Link
-                        to="/car-insurance"
-                        className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring"
-                      >
-                        {title}
-                        <ArrowRight className="ml-2 inline size-4" />
-                      </Link>
-                    ) : (
-                      <a
-                        href="#contact"
-                        onClick={() => setRequirement(title)}
-                        className="after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring"
-                      >
-                        {title}
-                      </a>
-                    )}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-ink-soft">
-                    {description}
-                  </p>
-                </article>
-              ))}
+        {/* INSURANCE SOLUTIONS SECTION - LINKED TO RESPECTIVE PRODUCT PAGES */}
+        <section id="solutions" className="scroll-mt-20 bg-background py-10 sm:py-14 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
+            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end sm:gap-6">
+              <SectionIntro
+                eyebrow="Insurance solutions"
+                title="Protection structured around real-world risk."
+                copy="From core business assets to complex corporate exposures, explore our dedicated coverage solutions designed to solve real claim vulnerabilities."
+              />
+              <a
+                href="#contact"
+                onClick={() => setRequirement("Portfolio Risk Review")}
+                className="hidden text-xs font-semibold text-primary hover:underline sm:inline-flex sm:items-center sm:gap-1.5"
+              >
+                Need custom risk advice? <ArrowRight size={14} />
+              </a>
+            </div>
+
+            <div className="mt-6 grid gap-3.5 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:mt-10 lg:grid-cols-4">
+              {solutions.map((item, index) => {
+                const Icon = item.icon;
+                const isHiddenOnMobile = index >= 4 && !showAllSolutions;
+                const cardContent = (
+                  <article className="group relative flex h-full flex-col justify-between rounded-xl border border-border bg-card p-4 sm:p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-md">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="flex size-9 sm:size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                          <Icon className="size-4.5 sm:size-5" strokeWidth={1.8} />
+                        </span>
+                        <span className="font-mono text-xs font-bold text-muted-foreground">
+                          0{index + 1}
+                        </span>
+                      </div>
+                      <span className="mt-3 inline-block rounded-md bg-secondary px-2 sm:px-2.5 py-0.5 text-[10.5px] sm:text-[11px] font-semibold text-primary">
+                        {item.highlight}
+                      </span>
+                      <h3 className="mt-2 text-sm sm:text-base font-semibold text-ink transition-colors group-hover:text-primary">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 flex items-center gap-1.5 border-t border-border pt-3 sm:mt-5 sm:pt-4 text-xs font-semibold text-primary">
+                      <span>Explore coverage</span>
+                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </article>
+                );
+
+                const linkWrapperClass = `rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  isHiddenOnMobile ? "hidden sm:block" : "block"
+                }`;
+
+                return item.isDedicated && item.to ? (
+                  <Link
+                    key={item.title}
+                    to={item.to}
+                    className={linkWrapperClass}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : item.slug ? (
+                  <Link
+                    key={item.title}
+                    to="/products/$productSlug"
+                    params={{ productSlug: item.slug }}
+                    className={linkWrapperClass}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : null;
+              })}
+            </div>
+
+            {/* Mobile Expand / Collapse Toggle */}
+            <div className="mt-5 text-center sm:hidden">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setShowAllSolutions((prev) => !prev)}
+                className="w-full text-xs font-semibold"
+              >
+                {showAllSolutions ? "Show Fewer Solutions" : "View All 8 Solutions"}
+              </Button>
             </div>
           </div>
         </section>
 
-        <section
-          id="about"
-          className="scroll-mt-20 section-rule bg-card py-14 lg:py-20"  
-        >
-          <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
+        <section id="about" className="scroll-mt-20 section-rule bg-card py-10 sm:py-14 lg:py-20">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:gap-14 sm:px-5 lg:grid-cols-2 lg:items-center lg:px-8">
             <SectionIntro
               eyebrow="About Gitvisha"
               title="Advice grounded in understanding, not assumptions."
               copy="Gitvisha is an insurance broking and risk advisory firm focused on helping clients make informed protection decisions. We begin by understanding your operations, assets, people, and priorities—then work to identify relevant insurance solutions and provide support across the policy lifecycle."
             />
-            <div className="relative border-l-2 border-primary pl-8 sm:pl-12">
-              <p className="font-display text-2xl font-medium leading-10 text-ink sm:text-3xl">
-                “Insurance should create clarity and confidence—not
-                complexity.”
+            <div className="relative border-l-2 border-primary pl-5 sm:pl-8 lg:pl-12">
+              <p className="font-display text-xl font-medium leading-8 text-ink sm:text-2xl sm:leading-10 lg:text-3xl">
+                “Insurance should create clarity and confidence—not complexity.”
               </p>
-              <p className="mt-6 text-sm leading-7 text-ink-soft">
-                Our role is to help make risk easier to understand, coverage
-                easier to evaluate, and the claims process easier to navigate.
+              <p className="mt-3 text-xs leading-relaxed text-ink-soft sm:mt-6 sm:text-sm sm:leading-7">
+                Our role is to help make risk easier to understand, coverage easier to evaluate, and
+                the claims process easier to navigate.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="bg-accent py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <section className="bg-accent py-10 sm:py-14 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
             <SectionIntro
               eyebrow="Why Gitvisha"
               title="A steady partner across the insurance journey."
             />
-            <div className="mt-12 grid gap-px border-y border-border bg-border md:grid-cols-5">
+            <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-10 sm:grid-cols-2 md:grid-cols-5 md:gap-px md:border-y md:border-border md:bg-border">
               {strengths.map((item, index) => (
-                <div key={item} className="bg-accent px-5 py-5">
-                  <span className="text-xs font-bold text-primary">
-                    0{index + 1}
-                  </span>
-                  <Check className="mt-4 size-4 text-primary" />
-                  <h3 className="mt-4 text-base font-semibold leading-6 text-ink">
+                <div
+                  key={item}
+                  className="rounded-lg border border-border bg-card p-3 shadow-2xs sm:rounded-none sm:border-0 sm:bg-accent sm:p-5 sm:shadow-none"
+                >
+                  <span className="text-xs font-bold text-primary">0{index + 1}</span>
+                  <Check className="mt-2.5 size-4 text-primary sm:mt-4" />
+                  <h3 className="mt-2 text-xs font-semibold leading-snug text-ink sm:text-sm md:text-base sm:leading-6">
                     {item}
                   </h3>
                 </div>
@@ -468,254 +558,497 @@ function HomePage() {
           </div>
         </section>
 
-        <section
-          id="industries"
-          className="scroll-mt-20 bg-background py-14 lg:py-20"
-        >
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-              <SectionIntro
-                eyebrow="Industries"
-                title="Industry context shapes better risk conversations."
-                copy="Every sector faces a different blend of operational, asset, liability, and people risks."
-              />
-              <div className="grid gap-4 sm:grid-cols-2">
-                {industries.map(({ title, icon: Icon }) => (
-                  <div
-                    key={title}
-                    className="flex min-w-0 items-center gap-4 border-b border-border py-5"
+        <section id="industries" className="scroll-mt-20 bg-background py-10 sm:py-14 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
+            <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
+              <div>
+                <SectionIntro
+                  eyebrow="Industries"
+                  title="Industry context shapes better risk conversations."
+                  copy="Every sector faces a different blend of operational, asset, liability, and people risks."
+                />
+                <div className="mt-4 sm:mt-6">
+                  <Link
+                    to="/industries"
+                    className="inline-flex items-center gap-2 rounded-lg bg-secondary px-3.5 py-2 text-xs font-bold text-primary transition-colors hover:bg-border sm:px-4 sm:py-2.5"
                   >
-                    <Icon
-                      className="size-6 shrink-0 text-primary"
-                      strokeWidth={1.6}
-                    />
-                    <span className="min-w-0 text-sm font-semibold text-ink">
-                      {title}
-                    </span>
-                  </div>
+                    Explore all sector risk profiles <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2 sm:gap-4">
+                {industries.map(({ title, slug, icon: Icon }) => (
+                  <Link
+                    key={title}
+                    to="/industries/$industrySlug"
+                    params={{ industrySlug: slug }}
+                    className="group flex min-w-0 items-center justify-between border-b border-border py-2.5 transition-colors hover:border-primary sm:py-4"
+                  >
+                    <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+                      <Icon className="size-4 shrink-0 text-primary sm:size-5" strokeWidth={1.75} />
+                      <span className="min-w-0 text-xs font-semibold text-ink transition-colors group-hover:text-primary sm:text-sm">
+                        {title}
+                      </span>
+                    </div>
+                    <ArrowRight className="size-3.5 shrink-0 text-ink-soft transition-transform group-hover:translate-x-1 group-hover:text-primary sm:size-4" />
+                  </Link>
                 ))}
               </div>
             </div>
-            <div className="mt-9 grid gap-5 sm:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:mt-9 sm:grid-cols-3 sm:gap-5">
               {[
                 {
-                  asset: industryAsset,
-                  small: industrySmall,
+                  img: propertyFireImg,
                   title: "Manufacturing",
-                  alt: "Precision electronics work in a manufacturing setting",
+                  slug: "manufacturing",
+                  alt: "Industrial manufacturing and plant equipment",
                 },
                 {
-                  asset: constructionAsset,
-                  small: constructionSmall,
+                  img: engineeringImg,
                   title: "Infrastructure & Construction",
-                  alt: "Construction professionals working on an infrastructure site",
+                  slug: "infrastructure-construction",
+                  alt: "Infrastructure construction project works",
                 },
                 {
-                  asset: logisticsAsset,
-                  small: logisticsSmall,
+                  img: marineImg,
                   title: "Logistics & Warehousing",
-                  alt: "Cargo containers at a freight terminal",
+                  slug: "logistics-warehousing",
+                  alt: "Marine cargo and warehouse logistics",
                 },
-              ].map(({ asset, small, title, alt }) => (
-                <figure key={title}>
-                  <div className="aspect-[3/2] overflow-hidden rounded-md">
+              ].map(({ img, title, slug, alt }) => (
+                <Link
+                  key={title}
+                  to="/industries/$industrySlug"
+                  params={{ industrySlug: slug }}
+                  className="group block"
+                >
+                  <div className="aspect-[16/10] overflow-hidden rounded-md bg-secondary sm:aspect-[3/2]">
                     <img
-                      src={asset.url}
-                      srcSet={`${small.url} 480w, ${asset.url} 800w`}
-                      sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1279px) 31vw, 390px"
+                      src={img}
                       alt={alt}
                       width={800}
                       height={533}
                       loading="lazy"
                       decoding="async"
-                      className="size-full object-cover"
+                      className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <figcaption className="border-b border-border py-3 text-sm font-semibold text-ink">
-                    {title}
-                  </figcaption>
-                </figure>
+                  <div className="flex items-center justify-between border-b border-border py-2 text-xs font-semibold text-ink group-hover:text-primary sm:py-3 sm:text-sm">
+                    <span>{title}</span>
+                    <ArrowRight className="size-3.5 text-ink-soft transition-transform group-hover:translate-x-1 group-hover:text-primary sm:size-4" />
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        <section
-          id="claims"
-          className="scroll-mt-20 bg-secondary py-14 lg:py-20"
-        >
-          <div className="mx-auto max-w-7xl px-5 lg:px-8">
-            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <SectionIntro
-                eyebrow="Claims assistance"
-                title="Clear support when it matters most."
-                copy="We help you understand requirements, organise information, and coordinate throughout the claims process."
-              />
-              <Button asChild size="lg" className="w-fit">
-                <a href="#contact">
-                  Need help with a claim? <ArrowRight />
-                </a>
-              </Button>
+        {/* IMPROVED CLAIMS ASSISTANCE SECTION */}
+        <section id="claims" className="scroll-mt-20 bg-secondary/80 py-10 sm:py-16 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:gap-8">
+              <div className="max-w-2xl">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-primary sm:text-xs">
+                  <ShieldCheck className="size-3.5" /> Claims Assistance &amp; Advocacy
+                </span>
+                <h2 className="mt-2.5 text-2xl font-semibold leading-tight text-ink sm:mt-3 sm:text-3xl lg:text-4xl">
+                  Rapid, dedicated support{" "}
+                  <span className="home-pink-accent">when an incident occurs.</span>
+                </h2>
+                <p className="mt-2.5 text-xs leading-relaxed text-ink-soft sm:mt-4 sm:text-sm sm:leading-7 sm:text-base">
+                  Insurance delivers on its promise during a claim. Gitvisha provides proactive
+                  claims advocacy—from immediate loss intimation and documentation verification to
+                  IRDAI surveyor liaison and settlement resolution.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <Button asChild size="default" className="w-full sm:w-fit sm:size-lg">
+                  <a href="#contact" onClick={() => setRequirement("Claims Assistance & Advocacy")}>
+                    Report a Claim <ArrowRight className="ml-1 size-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="default" className="w-full sm:w-fit sm:size-lg">
+                  <Link to="/claims">
+                    Claims Checklist &amp; Guide <ChevronRight className="ml-1 size-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
-            <div className="mt-14 grid gap-5 lg:grid-cols-4">
-              {claimSteps.map(
-                ({ number, title, detail, icon: Icon }, index) => (
-                  <article key={title} className="relative border-t border-border py-5">
+
+            {/* Claims process steps */}
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+              {claimSteps.map(({ number, title, detail, highlight, icon: Icon }, index) => (
+                <article
+                  key={title}
+                  className="relative flex flex-col justify-between rounded-xl border border-border bg-card p-4 shadow-xs transition-all hover:border-primary/60 hover:shadow-md sm:p-6 sm:shadow-sm"
+                >
+                  <div>
                     <div className="flex items-center justify-between">
-                      <Icon className="size-6 text-primary" />
-                      <span className="font-mono text-xs text-muted-foreground">
+                      <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary sm:size-11">
+                        <Icon className="size-4.5 sm:size-5" />
+                      </span>
+                      <span className="font-mono text-xs font-bold text-muted-foreground sm:text-sm">
                         {number}
                       </span>
                     </div>
-                    <h3 className="mt-5 text-xl font-semibold text-ink">
-                      {title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-ink-soft">
-                      {detail}
+                    <span className="mt-3 inline-block rounded-md bg-secondary px-2 sm:px-2.5 py-0.5 text-[10.5px] sm:text-[11px] font-semibold text-primary">
+                      {highlight}
+                    </span>
+                    <h3 className="mt-2 text-base font-semibold text-ink sm:mt-2.5 sm:text-lg">{title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-ink-soft sm:mt-2">{detail}</p>
+                  </div>
+
+                  <div className="mt-3.5 border-t border-border pt-2.5 sm:mt-5 sm:pt-3">
+                    <span className="text-[10px] font-medium text-muted-foreground sm:text-[11px]">
+                      Stage 0{index + 1} of 04
+                    </span>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Emergency Claims Callout Banner */}
+            <div className="mt-6 rounded-xl border border-primary/20 bg-card p-4 shadow-xs sm:mt-10 sm:p-8 sm:shadow-sm">
+              <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+                <div className="flex items-start gap-4">
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+                    <PhoneCall className="size-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-base font-semibold text-ink">
+                      Experiencing an active emergency or hospital admission?
+                    </h4>
+                    <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
+                      For cashless hospitalization intimation or urgent motor accidental towing,
+                      notify us immediately. Our claims desk assists with TPA pre-authorization and
+                      network garage liaison.
                     </p>
-                    {index < claimSteps.length - 1 && (
-                      <ChevronRight className="absolute -right-4 top-1/2 z-10 hidden size-7 rounded-full bg-primary p-1 text-primary-foreground lg:block" />
-                    )}
-                  </article>
-                ),
-              )}
+                    <div className="mt-3 flex flex-wrap gap-4 text-xs font-semibold text-ink">
+                      <span className="flex items-center gap-1.5 text-primary">
+                        <CheckCircle2 className="size-4" /> 24x7 Emergency Intimation
+                      </span>
+                      <span className="flex items-center gap-1.5 text-primary">
+                        <CheckCircle2 className="size-4" /> Cashless Network Hospital Assistance
+                      </span>
+                      <span className="flex items-center gap-1.5 text-primary">
+                        <CheckCircle2 className="size-4" /> Surveyor Documentation Advocacy
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2.5 rounded-lg bg-secondary/80 p-4 sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-start">
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                      Emergency Claims Desk
+                    </span>
+                    <a
+                      href="mailto:claims@gitvisha.com"
+                      className="block text-sm font-semibold text-primary hover:underline"
+                    >
+                      claims@gitvisha.com
+                    </a>
+                  </div>
+                  <Button asChild variant="outline" size="sm" className="w-fit">
+                    <Link to="/claims">
+                      Open Claims Guide <ArrowRight className="ml-1 size-3.5" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="contact"
-          className="scroll-mt-20 bg-card py-14 lg:py-20"
-        >
-          <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
+        {/* IMPROVED CONSULTATION & ENQUIRY FORM SECTION */}
+        <section id="contact" className="scroll-mt-20 bg-card py-10 sm:py-16 lg:py-24">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:gap-12 sm:px-5 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
             <div>
               <SectionIntro
-                eyebrow="Start a conversation"
-                title="Let’s understand your insurance needs."
-                copy="Share a few details and our team can follow up to discuss the next step. This form does not submit to a server yet."
+                eyebrow="Consultation & Risk Review"
+                title="Let’s understand your real-world risk."
+                copy="Share your insurance requirements or existing policy details. Our certified risk advisors evaluate exposures, benchmark insurer terms, and structure coverage tailored to your priorities."
               />
-              <div className="mt-10 space-y-5 text-sm text-ink-soft">
-                <a
-                  href="mailto:info@gitvisha.com"
-                  className="flex items-center gap-3 hover:text-primary"
-                >
-                  <Mail className="size-5 text-primary" />
-                  info@gitvisha.com
-                </a>
-                <a
-                  href="tel:+91XXXXXXXXXX"
-                  className="flex items-center gap-3 hover:text-primary"
-                >
-                  <Phone className="size-5 text-primary" />
-                  +91 XXXXX XXXXX
-                </a>
-                <p className="flex items-center gap-3">
-                  <Building2 className="size-5 text-primary" />
-                  Delhi NCR, India
-                </p>
+
+              {/* Advisory Commitments */}
+              <div className="mt-5 space-y-2.5 sm:mt-8 sm:space-y-4">
+                <div className="flex items-start gap-3 rounded-lg border border-border bg-background p-3.5 shadow-2xs sm:gap-3.5 sm:p-4">
+                  <ShieldCheck className="mt-0.5 size-4.5 shrink-0 text-primary sm:size-5" />
+                  <div>
+                    <h4 className="text-xs font-semibold text-ink sm:text-sm">
+                      Independent Advisory Advantage
+                    </h4>
+                    <p className="mt-0.5 text-xs leading-relaxed text-ink-soft">
+                      Unbiased policy structuring and rates benchmarked across India's leading
+                      private and public general insurers.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 rounded-lg border border-border bg-background p-3.5 shadow-2xs sm:gap-3.5 sm:p-4">
+                  <Clock className="mt-0.5 size-4.5 shrink-0 text-primary sm:size-5" />
+                  <div>
+                    <h4 className="text-xs font-semibold text-ink sm:text-sm">Rapid Response SLA</h4>
+                    <p className="mt-0.5 text-xs leading-relaxed text-ink-soft">
+                      Direct callback and preliminary risk consultation within 2 business hours.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 rounded-lg border border-border bg-background p-3.5 shadow-2xs sm:gap-3.5 sm:p-4">
+                  <CheckCircle2 className="mt-0.5 size-4.5 shrink-0 text-primary sm:size-5" />
+                  <div>
+                    <h4 className="text-xs font-semibold text-ink sm:text-sm">Confidential &amp; Zero Spam</h4>
+                    <p className="mt-0.5 text-xs leading-relaxed text-ink-soft">
+                      Your asset and operational data is strictly used for underwriting evaluation
+                      and never shared with third-party aggregators.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Direct Channels */}
+              <div className="mt-5 rounded-xl border border-border bg-secondary/50 p-4 text-xs sm:mt-8 sm:p-5 sm:text-sm text-ink-soft">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-ink sm:text-xs">
+                  Direct Communication Channels
+                </span>
+                <div className="mt-3 space-y-2.5 sm:mt-3.5 sm:space-y-3">
+                  <a
+                    href="mailto:info@gitvisha.com"
+                    className="flex items-center gap-2.5 transition-colors hover:text-primary sm:gap-3"
+                  >
+                    <Mail className="size-4 shrink-0 text-primary" />
+                    <span>
+                      Advisory Desk: <strong>info@gitvisha.com</strong>
+                    </span>
+                  </a>
+                  <a
+                    href="mailto:claims@gitvisha.com"
+                    className="flex items-center gap-2.5 transition-colors hover:text-primary sm:gap-3"
+                  >
+                    <ShieldCheck className="size-4 shrink-0 text-primary" />
+                    <span>
+                      Claims Escalations: <strong>claims@gitvisha.com</strong>
+                    </span>
+                  </a>
+                  <p className="flex items-center gap-2.5 sm:gap-3">
+                    <Building2 className="size-4 shrink-0 text-primary" />
+                    <span>Delhi NCR, India · Mon–Sat (9:30 AM – 6:30 PM IST)</span>
+                  </p>
+                </div>
               </div>
             </div>
 
+            {/* Upgraded Form Card */}
             <form
               onSubmit={submitForm}
-              className="grid gap-5 rounded-lg border border-border bg-background p-6 shadow-sm sm:grid-cols-2 sm:p-8"
+              className="grid gap-4 rounded-xl border border-border bg-background p-4 shadow-sm sm:grid-cols-2 sm:gap-5 sm:p-8"
               noValidate
             >
-              <Field label="Name" id="name">
+              <div className="sm:col-span-2">
+                <div className="flex items-center justify-between border-b border-border pb-3 sm:pb-4">
+                  <div>
+                    <h3 className="text-base font-semibold text-ink sm:text-lg">Request a Consultation</h3>
+                    <p className="mt-0.5 text-xs text-ink-soft">Fields marked * are required.</p>
+                  </div>
+                  <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary sm:size-9">
+                    <Mail className="size-4 sm:size-5" />
+                  </span>
+                </div>
+              </div>
+
+              <Field label="Full Name *" id="name">
                 <Input
                   id="name"
                   name="name"
                   required
                   minLength={2}
-                  placeholder="Your full name"
-                  className="h-11 bg-card"
+                  placeholder="e.g. Rajesh Sharma"
+                  className="h-10 sm:h-11 bg-card text-base sm:text-sm"
                 />
               </Field>
-              <Field label="Company Name" id="company">
-                <Input
-                  id="company"
-                  name="company"
-                  required
-                  minLength={2}
-                  placeholder="Company or organisation"
-                  className="h-11 bg-card"
-                />
-              </Field>
-              <Field label="Phone" id="phone">
+
+              <Field label="Phone Number *" id="phone">
                 <Input
                   id="phone"
                   name="phone"
                   type="tel"
                   required
                   pattern="[0-9+() -]{8,}"
-                  placeholder="Your phone number"
-                  className="h-11 bg-card"
+                  placeholder="+91 98765 43210"
+                  className="h-10 sm:h-11 bg-card text-base sm:text-sm"
                 />
               </Field>
-              <Field label="Email" id="email">
+
+              <Field label="Work / Personal Email *" id="email">
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   required
                   placeholder="you@company.com"
-                  className="h-11 bg-card"
+                  className="h-10 sm:h-11 bg-card text-base sm:text-sm"
                 />
               </Field>
 
-              <div className="space-y-2 sm:col-span-2">
-                <Label htmlFor="requirement">Insurance Requirement</Label>
+              <Field label="Company / Entity / Vehicle" id="company">
+                <Input
+                  id="company"
+                  name="company"
+                  placeholder="e.g. Acme Corp or Vehicle Reg"
+                  className="h-10 sm:h-11 bg-card text-base sm:text-sm"
+                />
+              </Field>
+
+              <div className="space-y-1.5 sm:col-span-2 sm:space-y-2">
+                <Label htmlFor="requirement" className="text-xs font-medium sm:text-sm">Insurance Requirement *</Label>
                 <select
                   id="requirement"
                   name="requirement"
                   required
                   value={requirement}
                   onChange={(event) => setRequirement(event.target.value)}
-                  className="h-11 w-full rounded-md border border-input bg-card px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="h-10 sm:h-11 w-full rounded-md border border-input bg-card px-3 text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   <option value="" disabled>
-                    Select a requirement
+                    Select an insurance solution *
                   </option>
-                  {solutions.map((item) => (
-                    <option key={item.title}>{item.title}</option>
-                  ))}
-                  <option>Claims Assistance</option>
-                  <option>Other / Not Sure</option>
+                  <optgroup label="Motor &amp; Vehicles">
+                    <option value="Car Insurance">Car Insurance (Comprehensive / Zero-Dep)</option>
+                    <option value="Bike Insurance">Bike Insurance (Two-Wheeler)</option>
+                    <option value="Commercial Vehicle Insurance">
+                      Commercial Vehicle &amp; Fleet Protection
+                    </option>
+                    <option value="Motor Insurance">Motor Insurance (General Enquiry)</option>
+                  </optgroup>
+                  <optgroup label="Health &amp; People">
+                    <option value="Health Insurance">
+                      Individual &amp; Family Health Insurance
+                    </option>
+                    <option value="Group Health Insurance">
+                      Corporate Group Health Mediclaim (GMC)
+                    </option>
+                    <option value="Personal Accident Insurance">Personal Accident Insurance</option>
+                    <option value="Health & People">Health &amp; People (General Enquiry)</option>
+                  </optgroup>
+                  <optgroup label="Property &amp; Business Assets">
+                    <option value="Property & Fire Insurance">
+                      Property &amp; Fire Insurance (SFSP)
+                    </option>
+                    <option value="Business Interruption">Business Interruption Insurance</option>
+                    <option value="Stock Declaration Insurance">Stock Declaration Policy</option>
+                    <option value="Business Insurance">Business Insurance (General Enquiry)</option>
+                  </optgroup>
+                  <optgroup label="Engineering &amp; Infrastructure">
+                    <option value="Engineering Insurance">
+                      Engineering Insurance (CAR / EAR / CPM)
+                    </option>
+                    <option value="Solar Pumping Insurance">
+                      Solar Pumping &amp; Renewable Energy
+                    </option>
+                    <option value="Road Insurance">Road &amp; Highway Infrastructure</option>
+                  </optgroup>
+                  <optgroup label="Marine, Liability &amp; Specialty">
+                    <option value="Marine Insurance">Marine Cargo &amp; Transit Insurance</option>
+                    <option value="Marine & Transit">Marine &amp; Transit (General Enquiry)</option>
+                    <option value="Liability Insurance">
+                      Liability Insurance (CGL / D&amp;O / Cyber)
+                    </option>
+                    <option value="Specialty & Corporate Risks">
+                      Specialty &amp; Corporate Risks
+                    </option>
+                  </optgroup>
+                  <optgroup label="Claims &amp; Risk Audit">
+                    <option value="Claims Assistance & Advocacy">
+                      Claims Assistance &amp; Advocacy
+                    </option>
+                    <option value="Portfolio Risk Review">
+                      Portfolio Risk Review &amp; Rate Audit
+                    </option>
+                    <option value="Other / Not Sure">Other / Custom Requirement</option>
+                  </optgroup>
                 </select>
               </div>
 
-              <Field label="Message" id="message" wide>
+              <div className="space-y-1.5 sm:col-span-2 sm:space-y-2">
+                <Label htmlFor="timeline" className="text-xs font-medium sm:text-sm">Policy Timeline / Priority</Label>
+                <select
+                  id="timeline"
+                  name="timeline"
+                  className="h-10 sm:h-11 w-full rounded-md border border-input bg-card px-3 text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  defaultValue="New Policy Enquiry"
+                >
+                  <option value="New Policy Enquiry">New Policy Setup (Immediate)</option>
+                  <option value="Renewal within 30 Days">
+                    Policy Expiring / Renewal within 30 Days
+                  </option>
+                  <option value="NCB Transfer & Renewal Benchmark">
+                    NCB Transfer &amp; Rate Benchmark
+                  </option>
+                  <option value="Active Policy Audit">
+                    Active Policy Audit &amp; Gap Analysis
+                  </option>
+                  <option value="Active Claim Assistance">Urgent Claim Assistance</option>
+                </select>
+              </div>
+
+              <Field label="Requirement Details / Specific Risks *" id="message" wide>
                 <Textarea
                   id="message"
                   name="message"
                   required
                   minLength={10}
-                  placeholder="Tell us briefly about your requirement"
-                  className="min-h-28 bg-card"
+                  placeholder="Tell us briefly about your requirement (e.g., sum insured, asset location, existing policy expiry, zero-dep add-on, or claims query)..."
+                  className="min-h-24 sm:min-h-28 bg-card text-base sm:text-sm"
                 />
               </Field>
 
-              <div className="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col items-start gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <p className="max-w-sm text-xs leading-5 text-muted-foreground">
-                  By submitting, you are requesting a follow-up. No information
-                  is sent or stored in this website preview.
+                  Submitting prepares an email draft with your details ready to send to
+                  info@gitvisha.com.
                 </p>
-                <Button type="submit" size="lg" className="shrink-0">
-                  Send Enquiry <ArrowRight />
+                <Button type="submit" size="default" className="w-full sm:w-auto sm:size-lg shrink-0">
+                  Prepare Enquiry <ArrowRight className="ml-1 size-4" />
                 </Button>
               </div>
 
               {submitted && (
                 <div
                   role="status"
-                  className="flex items-start gap-3 rounded-md border border-primary/30 bg-secondary p-4 text-sm text-ink sm:col-span-2"
+                  className="flex flex-col gap-3 rounded-xl border border-primary/40 bg-secondary p-5 text-ink sm:col-span-2"
                 >
-                  <CircleCheck className="mt-0.5 size-5 shrink-0 text-primary" />
-                  <span>
-                    <strong>Thank you.</strong> Your form is complete. Because
-                    this is a website preview, it has not been sent; please
-                    email info@gitvisha.com.
-                  </span>
+                  <div className="flex items-start gap-3">
+                    <CircleCheck className="mt-0.5 size-5 shrink-0 text-primary" />
+                    <div>
+                      <h4 className="font-semibold text-ink">
+                        Consultation Enquiry Draft Prepared!
+                      </h4>
+                      <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                        Your default email client should open with your consultation details ready
+                        to send. If it did not launch automatically, click the direct button below:
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-2 flex flex-wrap items-center gap-3">
+                    <Button asChild size="sm">
+                      <a href={mailtoHref}>
+                        Send Email Directly <ArrowRight className="ml-1 size-3.5" />
+                      </a>
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setRequirement("");
+                      }}
+                    >
+                      Submit Another Enquiry
+                    </Button>
+                  </div>
                 </div>
               )}
             </form>
