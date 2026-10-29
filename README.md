@@ -3,6 +3,7 @@
 Create the actual finished Gitvisha insurance broker website now. Brand: Gitvisha. Tagline: "Infinite Trust. Secure Peace". Use React + TypeScript + Tailwind + shadcn/ui and lucide icons. Premium modern corporate aesthetic: deep navy/charcoal, white surfaces, restrained blue/cyan/magenta accents, elegant typography, generous whitespace, subtle professional animation, responsive desktop/tablet/mobile.
 
 Build a polished one-page site with:
+
 - Sticky header: Gitvisha logo/wordmark, Home, About Us, Insurance Solutions, Industries, Claims Assistance, Contact, and primary Get a Quote CTA. Mobile menu.
 - Hero eyebrow "INSURANCE • RISK • CLAIMS", headline "Protecting What Matters. Securing What's Ahead.", concise risk/insurance copy, CTAs "Get a Quote" and "Explore Solutions", abstract geometric protection visual.
 - Insurance Solutions cards: Property & Fire Insurance, Engineering Insurance, Marine Insurance, Liability Insurance, Motor Insurance, Group Health & Personal Accident, Business Interruption, Specialty & Corporate Risks.
@@ -13,8 +14,8 @@ Build a polished one-page site with:
 - Quote/contact form with Name, Company Name, Phone, Email, Insurance Requirement dropdown, Message. Front-end validation and honest success state; no fake backend submission.
 - Contact/footer placeholders: info@gitvisha.com, +91 XXXXX XXXXX, Delhi NCR, India. Footer logo/wordmark, tagline, navigation, legal placeholders, © 2026 Gitvisha. Do not invent social URLs.
 - SEO title/meta description, semantic HTML, accessible contrast, reduced-motion support, working anchors/CTAs, reusable data arrays.
-Use a clean temporary wordmark or logo treatment if no image asset is available in this new project; do not falsely recreate an official logo.
-Do not use stock photos or fake statistics. Build and verify the complete UI, not a plan.
+  Use a clean temporary wordmark or logo treatment if no image asset is available in this new project; do not falsely recreate an official logo.
+  Do not use stock photos or fake statistics. Build and verify the complete UI, not a plan.
 
 This project was built with [Lovable](https://lovable.dev).
 

@@ -10,12 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CarInsuranceRouteImport } from './routes/car-insurance'
-import { Route as DesignOptionsRouteImport } from './routes/design-options'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as ClaimsRouteImport } from './routes/claims'
+import { Route as HealthInsuranceRouteImport } from './routes/health-insurance'
+import { Route as IndustriesIndexRouteImport } from './routes/industries/index'
+import { Route as IndustriesIndustrySlugRouteImport } from './routes/industries/$industrySlug'
+import { Route as ProductsProductSlugRouteImport } from './routes/products/$productSlug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarInsuranceRoute = CarInsuranceRouteImport.update({
@@ -23,40 +34,117 @@ const CarInsuranceRoute = CarInsuranceRouteImport.update({
   path: '/car-insurance',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DesignOptionsRoute = DesignOptionsRouteImport.update({
-  id: '/design-options',
-  path: '/design-options',
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaimsRoute = ClaimsRouteImport.update({
+  id: '/claims',
+  path: '/claims',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HealthInsuranceRoute = HealthInsuranceRouteImport.update({
+  id: '/health-insurance',
+  path: '/health-insurance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/industries/',
+  path: '/industries/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesIndustrySlugRoute = IndustriesIndustrySlugRouteImport.update({
+  id: '/industries/$industrySlug',
+  path: '/industries/$industrySlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsProductSlugRoute = ProductsProductSlugRouteImport.update({
+  id: '/products/$productSlug',
+  path: '/products/$productSlug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/car-insurance': typeof CarInsuranceRoute
-  '/design-options': typeof DesignOptionsRoute
+  '/careers': typeof CareersRoute
+  '/claims': typeof ClaimsRoute
+  '/health-insurance': typeof HealthInsuranceRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
+  '/products/$productSlug': typeof ProductsProductSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/car-insurance': typeof CarInsuranceRoute
-  '/design-options': typeof DesignOptionsRoute
+  '/careers': typeof CareersRoute
+  '/claims': typeof ClaimsRoute
+  '/health-insurance': typeof HealthInsuranceRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
+  '/products/$productSlug': typeof ProductsProductSlugRoute
+  '/industries': typeof IndustriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/car-insurance': typeof CarInsuranceRoute
-  '/design-options': typeof DesignOptionsRoute
+  '/careers': typeof CareersRoute
+  '/claims': typeof ClaimsRoute
+  '/health-insurance': typeof HealthInsuranceRoute
+  '/industries/$industrySlug': typeof IndustriesIndustrySlugRoute
+  '/products/$productSlug': typeof ProductsProductSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/car-insurance' | '/design-options'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/car-insurance'
+    | '/careers'
+    | '/claims'
+    | '/health-insurance'
+    | '/industries/$industrySlug'
+    | '/products/$productSlug'
+    | '/industries/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/car-insurance' | '/design-options'
-  id: '__root__' | '/' | '/car-insurance' | '/design-options'
+  to:
+    | '/'
+    | '/about'
+    | '/car-insurance'
+    | '/careers'
+    | '/claims'
+    | '/health-insurance'
+    | '/industries/$industrySlug'
+    | '/products/$productSlug'
+    | '/industries'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/car-insurance'
+    | '/careers'
+    | '/claims'
+    | '/health-insurance'
+    | '/industries/$industrySlug'
+    | '/products/$productSlug'
+    | '/industries/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CarInsuranceRoute: typeof CarInsuranceRoute
-  DesignOptionsRoute: typeof DesignOptionsRoute
+  CareersRoute: typeof CareersRoute
+  ClaimsRoute: typeof ClaimsRoute
+  HealthInsuranceRoute: typeof HealthInsuranceRoute
+  IndustriesIndustrySlugRoute: typeof IndustriesIndustrySlugRoute
+  ProductsProductSlugRoute: typeof ProductsProductSlugRoute
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/car-insurance': {
       id: '/car-insurance'
       path: '/car-insurance'
@@ -75,11 +170,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CarInsuranceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/design-options': {
-      id: '/design-options'
-      path: '/design-options'
-      fullPath: '/design-options'
-      preLoaderRoute: typeof DesignOptionsRouteImport
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/claims': {
+      id: '/claims'
+      path: '/claims'
+      fullPath: '/claims'
+      preLoaderRoute: typeof ClaimsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/health-insurance': {
+      id: '/health-insurance'
+      path: '/health-insurance'
+      fullPath: '/health-insurance'
+      preLoaderRoute: typeof HealthInsuranceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/industries'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/$industrySlug': {
+      id: '/industries/$industrySlug'
+      path: '/industries/$industrySlug'
+      fullPath: '/industries/$industrySlug'
+      preLoaderRoute: typeof IndustriesIndustrySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$productSlug': {
+      id: '/products/$productSlug'
+      path: '/products/$productSlug'
+      fullPath: '/products/$productSlug'
+      preLoaderRoute: typeof ProductsProductSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -87,8 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CarInsuranceRoute: CarInsuranceRoute,
-  DesignOptionsRoute: DesignOptionsRoute,
+  CareersRoute: CareersRoute,
+  ClaimsRoute: ClaimsRoute,
+  HealthInsuranceRoute: HealthInsuranceRoute,
+  IndustriesIndustrySlugRoute: IndustriesIndustrySlugRoute,
+  ProductsProductSlugRoute: ProductsProductSlugRoute,
+  IndustriesIndexRoute: IndustriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
