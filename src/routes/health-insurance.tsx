@@ -163,7 +163,7 @@ const healthPlans: {
     features: [
       "Triggers automatically once cumulative claims cross threshold deductible",
       "Lump-sum compensation on diagnosis of 36+ listed critical illnesses",
-      "Ultra-cost-effective: ₹1 Crore cover often starts at ~₹300-₹500/month",
+      "Ultra-cost-effective enhancement to multiply catastrophic health protection with high-deductible security",
       "No sub-limits on organ donor expenses or ICU stays",
     ],
   },

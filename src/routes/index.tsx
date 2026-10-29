@@ -5,6 +5,16 @@ import { ProductSelector } from "@/components/insurance/product-selector";
 import engineeringImg from "@/assets/products/engineering.jpg";
 import propertyFireImg from "@/assets/products/property-fire.jpg";
 import marineImg from "@/assets/products/marine.jpg";
+import solarPumpingImg from "@/assets/products/solar-pumping.jpg";
+import commercialPropertyImg from "@/assets/products/commercial-property.jpg";
+import groupHealthImg from "@/assets/products/group-health.jpg";
+import motorFleetImg from "@/assets/products/motor-fleet.jpg";
+import workmenSafetyImg from "@/assets/products/workmen-safety.jpg";
+import electronicEquipmentImg from "@/assets/products/electronic-equipment.jpg";
+import corporateLiabilityImg from "@/assets/products/corporate-liability.jpg";
+import roadConstructionImg from "@/assets/products/road-construction.jpg";
+import clientsFirstImg from "@/assets/products/clients-first.jpg";
+import corporateTeamImg from "@/assets/products/corporate-team.jpg";
 import { strengths } from "@/lib/insurance/shared";
 import sbiLogo from "@/assets/sbi.webp";
 import iciciLogo from "@/assets/icici.webp";
@@ -27,6 +37,7 @@ import {
   CircleCheck,
   Clock,
   ClipboardCheck,
+  Download,
   FileSearch,
   Flame,
   HeartPulse,
@@ -38,6 +49,7 @@ import {
   Server,
   ShieldCheck,
   Ship,
+  Sparkles,
   Store,
   Sun,
   Truck,
@@ -54,7 +66,7 @@ import { Textarea } from "@/components/ui/textarea";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gitvisha — Insurance Broking & Risk Advisory" },
+      { title: "Gitvisha â€” Insurance Broking & Risk Advisory" },
       {
         name: "description",
         content:
@@ -62,7 +74,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Gitvisha — Infinite Trust. Secure Peace",
+        content: "Gitvisha â€” Infinite Trust. Secure Peace",
       },
       {
         property: "og:description",
@@ -81,49 +93,73 @@ type SolutionItem = {
   title: string;
   description: string;
   icon: LucideIcon;
+  img: string;
+  alt: string;
   slug?: string;
   isDedicated?: boolean;
   to?: "/car-insurance" | "/health-insurance";
   highlight: string;
+  isFeatured?: boolean;
 };
 
 const solutions: SolutionItem[] = [
   {
     title: "Property & Fire Insurance",
-    description: "Protection for factory buildings, stock, machinery, and commercial real estate.",
+    description: "Protection for factory buildings, warehouse stock, machinery, and commercial real estate.",
     icon: Flame,
+    img: propertyFireImg,
+    alt: "Industrial property, commercial warehouse and fire asset protection",
     slug: "property-fire-insurance",
     highlight: "SFSP & Reinstatement Value",
   },
   {
-    title: "Engineering Insurance",
+    title: "Solar & Renewable Energy",
     description:
-      "Coverage for contractors all risks (CAR), erection (EAR), and machinery breakdown.",
+      "All-risk engineering cover for solar parks, rooftop PV, solar irrigation pumps, and generation loss.",
+    icon: Sun,
+    img: solarPumpingImg,
+    alt: "Solar photovoltaic panels, solar power plant arrays and renewable energy infrastructure",
+    slug: "solar-pumping-insurance",
+    highlight: "Featured · PV & Solar Parks",
+    isFeatured: true,
+  },
+  {
+    title: "Engineering & Projects",
+    description:
+      "Coverage for contractors all risks (CAR), erection (EAR), civil projects, and machinery breakdown.",
     icon: Wrench,
+    img: engineeringImg,
+    alt: "Engineering infrastructure, civil construction equipment and heavy plant machinery",
     slug: "engineering-insurance",
     highlight: "CAR / EAR & Machinery",
   },
   {
     title: "Marine & Transit Insurance",
     description:
-      "Inland transit and sea cargo protection across domestic and global supply chains.",
+      "Inland transit and sea cargo protection across domestic trade corridors and global supply chains.",
     icon: Ship,
+    img: marineImg,
+    alt: "Container ship cargo, freight logistics and multi-modal transit protection",
     slug: "marine-insurance",
     highlight: "ICC-A & Transit All Risks",
   },
   {
-    title: "Liability & Indemnity",
+    title: "Corporate Liability & Legal",
     description:
-      "Considered protection for public liability, product liability, and directors & officers (D&O).",
+      "Considered protection for commercial public liability, product liability, and directors & officers (D&O).",
     icon: Scale,
+    img: corporateLiabilityImg,
+    alt: "Corporate courtroom legal indemnity, corporate liability and third-party protection",
     slug: "liability-insurance",
     highlight: "Commercial & Third-Party",
   },
   {
-    title: "Car & Motor Insurance",
+    title: "Car & Fleet Insurance",
     description:
-      "Comprehensive, own-damage, zero-depreciation, and third-party protection for cars and fleets.",
+      "Comprehensive, own-damage, zero-depreciation, and fleet protection with network cashlessness.",
     icon: Truck,
+    img: motorFleetImg,
+    alt: "Commercial logistics fleet, company vehicles and private car protection",
     isDedicated: true,
     to: "/car-insurance",
     highlight: "Zero-Dep & Engine Protect",
@@ -131,25 +167,21 @@ const solutions: SolutionItem[] = [
   {
     title: "Health & Group Mediclaim",
     description:
-      "Individual, family floater, and corporate group health (GMC) with cashless hospital access.",
+      "Individual, family floater, and corporate group health (GMC) with cashless access across 10,000+ hospitals.",
     icon: HeartPulse,
+    img: groupHealthImg,
+    alt: "Healthcare professionals, employee workforce wellness and family medical coverage",
     isDedicated: true,
     to: "/health-insurance",
     highlight: "No Room-Rent Cap & 80D",
   },
   {
-    title: "Business Interruption",
+    title: "Corporate, Cyber & Specialty",
     description:
-      "Support for continuing fixed costs, loan EMIs, and lost gross profits following insured losses.",
-    icon: Zap,
-    slug: "business-interruption-insurance",
-    highlight: "Standing Charges & Profit",
-  },
-  {
-    title: "Corporate & Specialty Risks",
-    description:
-      "Bespoke risk management solutions for cyber liability, trade credit, and contractual indemnities.",
+      "Bespoke risk management solutions for electronic equipment, cyber liability, and specialty risks.",
     icon: ShieldCheck,
+    img: electronicEquipmentImg,
+    alt: "IT data center servers, electronic equipment and cyber risk infrastructure",
     slug: "corporate-specialty-risks",
     highlight: "Tailored Master Contracts",
   },
@@ -304,7 +336,7 @@ function HomePage() {
     const message = d.get("message") || "";
 
     const mailtoBody = encodeURIComponent(
-      `CONSULTATION & RISK ENQUIRY — GITVISHA\n` +
+      `CONSULTATION & RISK ENQUIRY â€” GITVISHA\n` +
         `-----------------------------------------\n` +
         `Name: ${name}\n` +
         `Phone: ${phone}\n` +
@@ -317,7 +349,7 @@ function HomePage() {
         `Submitted via gitvisha.com Consultation Desk`,
     );
 
-    const generatedMailto = `mailto:info@gitvisha.com?subject=${encodeURIComponent("Insurance Enquiry — " + req + " (" + name + ")")}&body=${mailtoBody}`;
+    const generatedMailto = `mailto:info@gitvisha.com?subject=${encodeURIComponent("Insurance Enquiry â€” " + req + " (" + name + ")")}&body=${mailtoBody}`;
     setMailtoHref(generatedMailto);
     setSubmitted(true);
     window.location.href = generatedMailto;
@@ -335,7 +367,7 @@ function HomePage() {
             <div className="mx-auto grid max-w-7xl items-center gap-3 px-4 py-4 sm:gap-4 sm:px-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:px-8 lg:py-3">
               <div className="relative z-10">
                 <p className="mb-2 text-xs font-bold uppercase tracking-wide text-primary sm:mb-3">
-                  Insurance · Risk · Claims
+                  Insurance Â· Risk Â· Claims
                 </p>
 
                 <h1 className="text-base font-semibold text-ink sm:text-lg">Gitvisha Insurance</h1>
@@ -425,6 +457,154 @@ function HomePage() {
           </div>
         </section>
 
+        {/* DEDICATED SOLAR & RENEWABLE ENERGY INSURANCE SECTION */}
+        <section
+          id="renewable-energy"
+          className="scroll-mt-20 border-b border-border bg-gradient-to-br from-amber-500/5 via-background to-emerald-500/5 py-12 sm:py-16 lg:py-20"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+                  <Sun className="size-4 text-amber-600 dark:text-amber-400" />
+                  <span>Featured Solution · Clean Tech &amp; Renewable Energy</span>
+                </div>
+
+                <h2 className="mt-3.5 text-2xl font-bold leading-tight text-ink sm:text-3xl md:text-4xl lg:text-[2.5rem]">
+                  Solar &amp; Renewable Energy Insurance
+                  <span className="block text-primary font-display mt-1">
+                    Powering Green Infrastructure with Guaranteed Security
+                  </span>
+                </h2>
+
+                <p className="mt-3.5 text-xs leading-relaxed text-ink-soft sm:text-sm md:text-base sm:leading-7">
+                  Renewable energy installations face harsh environmental exposures—cyclonic storms, hail damage, lightning strikes, inverter burnout, and prolonged loss of generation revenue. Gitvisha structures specialized all-risk policies tailored for utility-scale solar parks, commercial rooftop installations, solar agricultural pumping schemes, and wind turbine assets.
+                </p>
+
+                {/* Key Capability Highlights */}
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5">
+                  <div className="flex items-start gap-3 rounded-lg border border-border bg-card p-3 shadow-2xs">
+                    <Sun className="mt-0.5 size-4.5 shrink-0 text-amber-600 dark:text-amber-400" />
+                    <div>
+                      <h4 className="text-xs font-bold text-ink sm:text-sm">Solar Arrays &amp; Inverters</h4>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-ink-soft">
+                        Complete physical damage cover for mono/bifacial PV modules, string inverters &amp; HT switchyards.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-lg border border-border bg-card p-3 shadow-2xs">
+                    <Zap className="mt-0.5 size-4.5 shrink-0 text-primary" />
+                    <div>
+                      <h4 className="text-xs font-bold text-ink sm:text-sm">Generation Loss (ALOP)</h4>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-ink-soft">
+                        Revenue interruption indemnity safeguarding tariff cash flows and debt service during outages.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-lg border border-border bg-card p-3 shadow-2xs">
+                    <ShieldCheck className="mt-0.5 size-4.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                    <div>
+                      <h4 className="text-xs font-bold text-ink sm:text-sm">Extreme Weather Perils</h4>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-ink-soft">
+                        Tailored safeguards against gale wind shears, heavy hail, lightning surge, and flash floods.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-lg border border-border bg-card p-3 shadow-2xs">
+                    <CheckCircle2 className="mt-0.5 size-4.5 shrink-0 text-primary" />
+                    <div>
+                      <h4 className="text-xs font-bold text-ink sm:text-sm">Multi-Crore Capacity</h4>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-ink-soft">
+                        Underwritten with India's premier public and private general insurance consortia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <Button asChild size="default" className="sm:size-lg shadow-sm">
+                    <Link to="/products/$productSlug" params={{ productSlug: "solar-pumping-insurance" }}>
+                      Explore Renewable Energy Cover <ArrowRight className="ml-1.5 size-4" />
+                    </Link>
+                  </Button>
+
+                  <Button asChild variant="outline" size="default" className="sm:size-lg">
+                    <a
+                      href="/brochures/gitvisha-solar-pumping-brochure.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <Download className="size-4" />
+                      Download Solar Brochure (PDF)
+                    </a>
+                  </Button>
+
+                  <Button asChild variant="ghost" size="default" className="text-xs font-semibold text-primary">
+                    <Link to="/industries/$industrySlug" params={{ industrySlug: "renewable-energy-solar" }}>
+                      Sector Risk Profile <ChevronRight className="ml-1 size-3.5" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Visual Card with Image & Overlays */}
+              <div className="relative">
+                <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-lg">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-secondary">
+                    <img
+                      src={solarPumpingImg}
+                      alt="Solar power plant panels, agricultural solar pumping and renewable energy infrastructure"
+                      width={1000}
+                      height={750}
+                      loading="lazy"
+                      decoding="async"
+                      className="size-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
+
+                  {/* Top Badge */}
+                  <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
+                    <span className="rounded-md bg-background/90 px-2.5 py-1 text-[11px] font-bold text-ink backdrop-blur-xs shadow-xs">
+                      Clean Energy Protection
+                    </span>
+                    <span className="rounded-full bg-emerald-500/90 px-2.5 py-0.5 text-[10px] font-bold text-white shadow-xs">
+                      IRDAI-Regulated Insurers
+                    </span>
+                  </div>
+
+                  {/* Bottom Caption / Floating details */}
+                  <div className="absolute bottom-3.5 left-3.5 right-3.5 text-white">
+                    <p className="text-sm font-bold sm:text-base">
+                      Utility-Scale PV · Commercial Rooftops · Solar Pumping Assets
+                    </p>
+                    <p className="mt-1 text-xs text-white/80 leading-relaxed">
+                      All-risk machinery breakdown, electrical surge, and natural peril insurance with fast-track claims support.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Decorative floating stats card */}
+                <div className="hidden sm:flex absolute -bottom-4 -left-4 items-center gap-3 rounded-xl border border-border bg-card/95 p-3.5 shadow-xl backdrop-blur-md">
+                  <div className="flex size-10 items-center justify-center rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                    <Sun className="size-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-ink">Zero Generation Loss Ambiguity</p>
+                    <p className="text-[10px] text-ink-soft">Direct Surveyor Liaison &amp; ALOP Protection</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* INSURANCE SOLUTIONS SECTION - LINKED TO RESPECTIVE PRODUCT PAGES */}
         <section id="solutions" className="scroll-mt-20 bg-background py-10 sm:py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-8">
@@ -443,33 +623,62 @@ function HomePage() {
               </a>
             </div>
 
-            <div className="mt-6 grid gap-3.5 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:mt-10 lg:grid-cols-4">
+            <div className="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
               {solutions.map((item, index) => {
                 const Icon = item.icon;
                 const isHiddenOnMobile = index >= 4 && !showAllSolutions;
                 const cardContent = (
-                  <article className="group relative flex h-full flex-col justify-between rounded-xl border border-border bg-card p-4 sm:p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-md">
+                  <article
+                    className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border bg-card shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
+                      item.isFeatured
+                        ? "border-amber-500/50 hover:border-amber-500"
+                        : "border-border hover:border-primary"
+                    }`}
+                  >
                     <div>
-                      <div className="flex items-center justify-between">
-                        <span className="flex size-9 sm:size-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                          <Icon className="size-4.5 sm:size-5" strokeWidth={1.8} />
-                        </span>
-                        <span className="font-mono text-xs font-bold text-muted-foreground">
+                      {/* Visual Image Header */}
+                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary">
+                        <img
+                          src={item.img}
+                          alt={item.alt}
+                          width={600}
+                          height={375}
+                          loading="lazy"
+                          decoding="async"
+                          className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                        {/* Overlay Badges */}
+                        <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+                          <span
+                            className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10.5px] font-bold shadow-xs backdrop-blur-xs ${
+                              item.isFeatured
+                                ? "bg-amber-500 text-white"
+                                : "bg-card/90 text-primary"
+                            }`}
+                          >
+                            <Icon className="size-3" />
+                            {item.highlight}
+                          </span>
+                        </div>
+
+                        <span className="absolute top-2.5 right-2.5 rounded-md bg-black/60 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white/90 backdrop-blur-xs">
                           0{index + 1}
                         </span>
                       </div>
-                      <span className="mt-3 inline-block rounded-md bg-secondary px-2 sm:px-2.5 py-0.5 text-[10.5px] sm:text-[11px] font-semibold text-primary">
-                        {item.highlight}
-                      </span>
-                      <h3 className="mt-2 text-sm sm:text-base font-semibold text-ink transition-colors group-hover:text-primary">
-                        {item.title}
-                      </h3>
-                      <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
-                        {item.description}
-                      </p>
+
+                      <div className="p-4 sm:p-5">
+                        <h3 className="text-sm sm:text-base font-semibold text-ink transition-colors group-hover:text-primary">
+                          {item.title}
+                        </h3>
+                        <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="mt-4 flex items-center gap-1.5 border-t border-border pt-3 sm:mt-5 sm:pt-4 text-xs font-semibold text-primary">
+                    <div className="flex items-center justify-between border-t border-border px-4 py-3 sm:px-5 text-xs font-semibold text-primary">
                       <span>Explore coverage</span>
                       <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
@@ -516,21 +725,58 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="about" className="scroll-mt-20 section-rule bg-card py-10 sm:py-14 lg:py-20">
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:gap-14 sm:px-5 lg:grid-cols-2 lg:items-center lg:px-8">
-            <SectionIntro
-              eyebrow="About Gitvisha"
-              title="Advice grounded in understanding, not assumptions."
-              copy="Gitvisha is an insurance broking and risk advisory firm focused on helping clients make informed protection decisions. We begin by understanding your operations, assets, people, and priorities—then work to identify relevant insurance solutions and provide support across the policy lifecycle."
-            />
-            <div className="relative border-l-2 border-primary pl-5 sm:pl-8 lg:pl-12">
-              <p className="font-display text-xl font-medium leading-8 text-ink sm:text-2xl sm:leading-10 lg:text-3xl">
-                “Insurance should create clarity and confidence—not complexity.”
-              </p>
-              <p className="mt-3 text-xs leading-relaxed text-ink-soft sm:mt-6 sm:text-sm sm:leading-7">
-                Our role is to help make risk easier to understand, coverage easier to evaluate, and
-                the claims process easier to navigate.
-              </p>
+        <section id="about" className="scroll-mt-20 section-rule bg-card py-10 sm:py-16 lg:py-24">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:gap-12 sm:px-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8">
+            <div className="space-y-6">
+              <SectionIntro
+                eyebrow="About Gitvisha"
+                title="Advice grounded in understanding, not assumptions."
+                copy="Gitvisha is an insurance broking and risk advisory firm focused on helping clients make informed protection decisions. We begin by understanding your operations, assets, people, and priorities—then work to identify relevant insurance solutions and provide support across the policy lifecycle."
+              />
+              <div className="relative border-l-2 border-primary pl-5 sm:pl-8">
+                <p className="font-display text-lg font-medium leading-7 text-ink sm:text-xl sm:leading-8 lg:text-2xl">
+                  &ldquo;Insurance should create clarity and confidence&mdash;not complexity.&rdquo;
+                </p>
+                <p className="mt-2.5 text-xs leading-relaxed text-ink-soft sm:text-sm sm:leading-6">
+                  Our role is to help make risk easier to understand, coverage easier to evaluate, and
+                  the claims process easier to navigate.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 pt-1 sm:grid-cols-3">
+                <div className="rounded-lg border border-border bg-background p-3 text-center">
+                  <p className="text-lg sm:text-xl font-extrabold text-primary">100%</p>
+                  <p className="text-[11px] font-medium text-ink-soft">Client-First Advocacy</p>
+                </div>
+                <div className="rounded-lg border border-border bg-background p-3 text-center">
+                  <p className="text-lg sm:text-xl font-extrabold text-primary">Multi-Sector</p>
+                  <p className="text-[11px] font-medium text-ink-soft">Domain Advisory</p>
+                </div>
+                <div className="col-span-2 sm:col-span-1 rounded-lg border border-border bg-background p-3 text-center">
+                  <p className="text-lg sm:text-xl font-extrabold text-primary">IRDAI</p>
+                  <p className="text-[11px] font-medium text-ink-soft">Regulated Partners</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-2xl border border-border shadow-md">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-secondary">
+                  <img
+                    src={corporateTeamImg}
+                    alt="Gitvisha insurance broking and corporate risk advisory team consultation"
+                    width={800}
+                    height={600}
+                    loading="lazy"
+                    decoding="async"
+                    className="size-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <p className="text-xs sm:text-sm font-bold">Independent Broking &amp; Risk Advisory</p>
+                  <p className="text-[11px] text-white/80">Tailored risk transfer strategies for growing enterprises</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -595,45 +841,73 @@ function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="mt-6 grid gap-3 sm:mt-9 sm:grid-cols-3 sm:gap-5">
+            <div className="mt-6 grid gap-3.5 sm:mt-9 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
               {[
                 {
-                  img: propertyFireImg,
-                  title: "Manufacturing",
-                  slug: "manufacturing",
-                  alt: "Industrial manufacturing and plant equipment",
+                  img: solarPumpingImg,
+                  title: "Renewable Energy & Solar",
+                  slug: "renewable-energy-solar",
+                  alt: "Solar photovoltaic panels, solar power plant arrays and renewable energy infrastructure",
+                  detail: "PV arrays, wind parks & ALOP generation loss cover",
                 },
                 {
-                  img: engineeringImg,
-                  title: "Infrastructure & Construction",
+                  img: commercialPropertyImg,
+                  title: "Manufacturing & Industrial Plants",
+                  slug: "manufacturing",
+                  alt: "Industrial manufacturing plants and heavy machinery equipment",
+                  detail: "Boilers, CNC lines, machinery breakdown & fire perils",
+                },
+                {
+                  img: roadConstructionImg,
+                  title: "Infrastructure & Heavy Construction",
                   slug: "infrastructure-construction",
-                  alt: "Infrastructure construction project works",
+                  alt: "Highway roads, bridges and infrastructure construction project works",
+                  detail: "CAR / EAR contracts, CPM plant & delay in startup",
                 },
                 {
                   img: marineImg,
-                  title: "Logistics & Warehousing",
+                  title: "Logistics & Supply Chains",
                   slug: "logistics-warehousing",
-                  alt: "Marine cargo and warehouse logistics",
+                  alt: "Container ship cargo, freight logistics and multi-modal transit protection",
+                  detail: "Marine cargo, open policies, warehouse transit & storage",
                 },
-              ].map(({ img, title, slug, alt }) => (
+                {
+                  img: electronicEquipmentImg,
+                  title: "IT, Tech & Corporate",
+                  slug: "it-tech-corporate",
+                  alt: "IT data center servers, electronic equipment and cyber risk infrastructure",
+                  detail: "Server farms, cloud equipment & cyber breach liability",
+                },
+                {
+                  img: workmenSafetyImg,
+                  title: "Workforce & Industrial Safety",
+                  slug: "manufacturing",
+                  alt: "Industrial safety inspection and workforce protective measures",
+                  detail: "Employee compensation, group mediclaim & workplace liability",
+                },
+              ].map(({ img, title, slug, alt, detail }) => (
                 <Link
                   key={title}
                   to="/industries/$industrySlug"
                   params={{ industrySlug: slug }}
-                  className="group block"
+                  className="group block overflow-hidden rounded-xl border border-border bg-card shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-md"
                 >
-                  <div className="aspect-[16/10] overflow-hidden rounded-md bg-secondary sm:aspect-[3/2]">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary">
                     <img
                       src={img}
                       alt={alt}
                       width={800}
-                      height={533}
+                      height={500}
                       loading="lazy"
                       decoding="async"
-                      className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                    <span className="absolute bottom-2.5 left-2.5 rounded-md bg-black/60 px-2 py-0.5 text-[10.5px] font-medium text-white/95 backdrop-blur-xs">
+                      {detail}
+                    </span>
                   </div>
-                  <div className="flex items-center justify-between border-b border-border py-2 text-xs font-semibold text-ink group-hover:text-primary sm:py-3 sm:text-sm">
+                  <div className="flex items-center justify-between p-3.5 sm:p-4 text-xs font-semibold text-ink transition-colors group-hover:text-primary sm:text-sm">
                     <span>{title}</span>
                     <ArrowRight className="size-3.5 text-ink-soft transition-transform group-hover:translate-x-1 group-hover:text-primary sm:size-4" />
                   </div>
@@ -657,7 +931,7 @@ function HomePage() {
                 </h2>
                 <p className="mt-2.5 text-xs leading-relaxed text-ink-soft sm:mt-4 sm:text-sm sm:leading-7 sm:text-base">
                   Insurance delivers on its promise during a claim. Gitvisha provides proactive
-                  claims advocacy—from immediate loss intimation and documentation verification to
+                  claims advocacyâ€”from immediate loss intimation and documentation verification to
                   IRDAI surveyor liaison and settlement resolution.
                 </p>
               </div>
@@ -711,9 +985,20 @@ function HomePage() {
             {/* Emergency Claims Callout Banner */}
             <div className="mt-6 rounded-xl border border-primary/20 bg-card p-4 shadow-xs sm:mt-10 sm:p-8 sm:shadow-sm">
               <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-center">
-                <div className="flex items-start gap-4">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-                    <PhoneCall className="size-6" />
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <div className="relative aspect-[4/3] w-full sm:w-48 shrink-0 overflow-hidden rounded-xl border border-border shadow-xs">
+                    <img
+                      src={clientsFirstImg}
+                      alt="Dedicated claims assistance and surveyor liaison advocate supporting client"
+                      width={400}
+                      height={300}
+                      loading="lazy"
+                      decoding="async"
+                      className="size-full object-cover"
+                    />
+                    <span className="absolute bottom-1.5 left-1.5 rounded-md bg-black/70 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-xs">
+                      Claims Advocacy
+                    </span>
                   </div>
                   <div>
                     <h4 className="text-base font-semibold text-ink">
@@ -767,7 +1052,7 @@ function HomePage() {
             <div>
               <SectionIntro
                 eyebrow="Consultation & Risk Review"
-                title="Let’s understand your real-world risk."
+                title="Letâ€™s understand your real-world risk."
                 copy="Share your insurance requirements or existing policy details. Our certified risk advisors evaluate exposures, benchmark insurer terms, and structure coverage tailored to your priorities."
               />
 
@@ -834,7 +1119,7 @@ function HomePage() {
                   </a>
                   <p className="flex items-center gap-2.5 sm:gap-3">
                     <Building2 className="size-4 shrink-0 text-primary" />
-                    <span>Delhi NCR, India · Mon–Sat (9:30 AM – 6:30 PM IST)</span>
+                    <span>Delhi NCR, India Â· Monâ€“Sat (9:30 AM â€“ 6:30 PM IST)</span>
                   </p>
                 </div>
               </div>

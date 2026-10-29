@@ -47,130 +47,6 @@ export function HealthQuoteForm() {
   const [submittedData, setSubmittedData] = useState<HealthEnquiry | null>(null);
   const statusRef = useRef<HTMLDivElement>(null);
 
-  // Dynamic benchmark rates based on industry standards & user-specified rate tiers:
-  function getEstimatedPremium() {
-    const isIndividual = selectedMembers === "Self Only" || selectedPlan === "Individual Health";
-    const isCouple = selectedMembers === "Self + Spouse";
-    const isFamilyWithKids =
-      selectedMembers === "Self + Spouse + 1 Child" ||
-      selectedMembers === "Self + Spouse + 2 Children" ||
-      selectedMembers === "Entire Family + Parents";
-
-    if (isIndividual) {
-      if (selectedAge.includes("Up to 50") || selectedAge.includes("50")) {
-        return {
-          annualRange: "₹10,000 – ₹12,000 / year",
-          monthlyRange: "₹830 – ₹1,000 / month",
-          label: "Individual Cover (Age ≤ 50)",
-          badge: "₹10k–₹12k Benchmark",
-        };
-      } else if (selectedAge.includes("51–55")) {
-        return {
-          annualRange: "₹14,000 – ₹18,000 / year",
-          monthlyRange: "₹1,160 – ₹1,500 / month",
-          label: "Individual Cover (Age 51–55)",
-          badge: "Pre-Senior Tier",
-        };
-      } else if (selectedAge.includes("56–60")) {
-        return {
-          annualRange: "₹22,000 – ₹28,000 / year",
-          monthlyRange: "₹1,830 – ₹2,330 / month",
-          label: "Individual Cover (Age 56–60)",
-          badge: "Senior Transition",
-        };
-      } else if (selectedAge.includes("60–70")) {
-        return {
-          annualRange: "₹40,000 – ₹45,000 / year",
-          monthlyRange: "₹3,330 – ₹3,750 / month",
-          label: "Senior Individual (Age 60–70)",
-          badge: "₹40k–₹45k Benchmark",
-        };
-      } else {
-        return {
-          annualRange: "₹50,000 – ₹70,000 / year",
-          monthlyRange: "₹4,160 – ₹5,830 / month",
-          label: "Senior Individual (Age 70+)",
-          badge: "₹50k–₹70k Benchmark",
-        };
-      }
-    }
-
-    if (isCouple) {
-      if (selectedAge.includes("Up to 50") || selectedAge.includes("51–55")) {
-        return {
-          annualRange: "Approx. ₹20,000 / year",
-          monthlyRange: "~₹1,660 / month",
-          label: "Husband & Wife Floater (Age ≤ 55)",
-          badge: "Approx ₹20k Benchmark",
-        };
-      } else if (selectedAge.includes("56–60")) {
-        return {
-          annualRange: "₹28,000 – ₹36,000 / year",
-          monthlyRange: "₹2,330 – ₹3,000 / month",
-          label: "Husband & Wife Floater (Age 56–60)",
-          badge: "Pre-Senior Couple",
-        };
-      } else if (selectedAge.includes("60–70")) {
-        return {
-          annualRange: "₹65,000 – ₹78,000 / year",
-          monthlyRange: "₹5,400 – ₹6,500 / month",
-          label: "Senior Couple Floater (Age 60–70)",
-          badge: "Senior Couple Tier",
-        };
-      } else {
-        return {
-          annualRange: "₹85,000 – ₹1,10,000 / year",
-          monthlyRange: "₹7,080 – ₹9,160 / month",
-          label: "Senior Couple Floater (Age 70+)",
-          badge: "Super Senior Couple",
-        };
-      }
-    }
-
-    if (isFamilyWithKids) {
-      if (selectedAge.includes("Up to 50") || selectedAge.includes("51–55")) {
-        return {
-          annualRange: "₹21,000 – ₹35,000 / year",
-          monthlyRange: "₹1,750 – ₹2,900 / month",
-          label: "Family Floater (2 Adults + Kids, Age ≤ 55)",
-          badge: "₹21k–₹35k Benchmark",
-        };
-      } else if (selectedAge.includes("56–60")) {
-        return {
-          annualRange: "₹34,000 – ₹45,000 / year",
-          monthlyRange: "₹2,830 – ₹3,750 / month",
-          label: "Family Floater (Age 56–60)",
-          badge: "Pre-Senior Family",
-        };
-      } else {
-        return {
-          annualRange: "₹55,000 – ₹75,000 / year",
-          monthlyRange: "₹4,580 – ₹6,250 / month",
-          label: "Multi-Generation Family Floater",
-          badge: "Comprehensive Family",
-        };
-      }
-    }
-
-    if (selectedAge.includes("60–70")) {
-      return {
-        annualRange: "₹40,000 – ₹45,000 / year",
-        monthlyRange: "₹3,330 – ₹3,750 / month",
-        label: "Senior Citizen Cover (Age 60–70)",
-        badge: "₹40k–₹45k Benchmark",
-      };
-    } else {
-      return {
-        annualRange: "₹50,000 – ₹70,000 / year",
-        monthlyRange: "₹4,160 – ₹5,830 / month",
-        label: "Senior Citizen Cover (Age 70+)",
-        badge: "₹50k–₹70k Benchmark",
-      };
-    }
-  }
-
-  const est = getEstimatedPremium();
-
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -220,7 +96,6 @@ export function HealthQuoteForm() {
         `Sum Insured: ${submittedData.sumInsured}\n` +
         `Insuring: ${submittedData.members}\n` +
         `Eldest Age: ${submittedData.eldestAge}\n` +
-        `Indicative Market Benchmark: ${est.annualRange} (${est.monthlyRange})\n` +
         `Pre-existing Conditions: ${submittedData.hasExistingConditions}\n` +
         `Message / Notes: ${submittedData.message || "None"}\n\n` +
         `Please share an objective side-by-side health insurance comparison across ICICI Lombard, HDFC ERGO, TATA AIG, SBI General, Star Health, IFFCO Tokio, and Kotak Zurich with zero room rent capping.`,
@@ -273,8 +148,8 @@ export function HealthQuoteForm() {
               <span className="font-semibold text-ink">{submittedData.eldestAge}</span>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-1 border-b border-border/60 pb-2">
-              <span className="text-ink-soft">Indicative Benchmark:</span>
-              <span className="font-bold text-primary">{est.annualRange}</span>
+              <span className="text-ink-soft">Advisory Focus:</span>
+              <span className="font-semibold text-primary">Objective Multi-Insurer Review</span>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-1">
               <span className="text-ink-soft">Pre-existing Conditions:</span>
@@ -322,7 +197,7 @@ export function HealthQuoteForm() {
                 <HeartPulse className="size-4" />
               </span>
               <p className="text-xs font-bold uppercase tracking-wider text-primary truncate">
-                Instant Advisory &amp; Quote Benchmarking
+                Instant Advisory &amp; Coverage Analysis
               </p>
             </div>
             <h3 className="mt-2 text-xl font-bold tracking-tight text-ink sm:text-2xl md:text-3xl break-words">
@@ -414,7 +289,7 @@ export function HealthQuoteForm() {
           <div className="space-y-2 min-w-0 w-full">
             <div className="flex flex-wrap items-center justify-between gap-1">
               <Label className="text-xs font-semibold text-ink">4. Preferred Sum Insured</Label>
-              <span className="text-[11px] font-semibold text-primary">Recommended: ₹10L–₹25L</span>
+              <span className="text-[11px] font-semibold text-primary">Popular Cover: ₹10L–₹25L</span>
             </div>
             <div className="grid grid-cols-3 min-[540px]:grid-cols-3 xl:grid-cols-6 gap-1.5 sm:gap-2 min-w-0 w-full">
               {sumInsuredTiers.map((tier) => {
@@ -546,24 +421,24 @@ export function HealthQuoteForm() {
             />
           </div>
 
-          {/* Dynamic Benchmark Indicator Bar with User-Specified Rate Tiers */}
-          <div className="rounded-xl border border-primary/30 bg-primary/5 p-3.5 sm:p-4 shadow-xs min-w-0 w-full">
+          {/* Objective Advisory Guarantee Card */}
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-3.5 sm:p-4 shadow-xs min-w-0 w-full">
             <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between min-w-0">
               <div className="space-y-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-1.5">
                   <Sparkles className="size-4 shrink-0 text-primary" />
-                  <span className="text-xs font-bold text-ink truncate">{est.label}</span>
+                  <span className="text-xs font-bold text-ink truncate">Unbiased Health Advisory Desk</span>
                   <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary shrink-0">
-                    {est.badge}
+                    Zero Commission Bias
                   </span>
                 </div>
                 <p className="text-[11px] leading-snug text-ink-soft break-words">
-                  Market rate estimate for standard ₹10L–₹25L cover with zero room rent cap
+                  Comparing hospital network density, cashless approval speed, and zero room-rent caps across IRDAI-regulated insurers.
                 </p>
               </div>
               <div className="border-t border-primary/15 pt-2 text-left sm:border-t-0 sm:pt-0 sm:text-right shrink-0">
-                <span className="text-lg sm:text-xl font-extrabold text-primary leading-none">{est.annualRange}</span>
-                <p className="mt-0.5 text-[11px] font-semibold text-ink-soft">({est.monthlyRange}*)</p>
+                <span className="text-xs sm:text-sm font-bold text-primary leading-none">10,000+ Hospitals</span>
+                <p className="mt-0.5 text-[11px] font-medium text-ink-soft">Pan-India Cashless</p>
               </div>
             </div>
           </div>
