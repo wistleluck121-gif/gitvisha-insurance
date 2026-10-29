@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { FloatingChatbot } from "@/components/chatbot/floating-chatbot";
 
 function NotFoundComponent() {
   return (
@@ -124,6 +125,7 @@ function RootComponent() {
       <main>
         <Outlet />
       </main>
+      <FloatingChatbot />
     </QueryClientProvider>
   );
 }
