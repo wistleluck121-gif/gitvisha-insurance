@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CarInsuranceRouteImport } from './routes/car-insurance'
+import { Route as DesignOptionsRouteImport } from './routes/design-options'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const CarInsuranceRoute = CarInsuranceRouteImport.update({
   path: '/car-insurance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesignOptionsRoute = DesignOptionsRouteImport.update({
+  id: '/design-options',
+  path: '/design-options',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/car-insurance': typeof CarInsuranceRoute
+  '/design-options': typeof DesignOptionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/car-insurance': typeof CarInsuranceRoute
+  '/design-options': typeof DesignOptionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/car-insurance': typeof CarInsuranceRoute
+  '/design-options': typeof DesignOptionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/car-insurance'
+  fullPaths: '/' | '/car-insurance' | '/design-options'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/car-insurance'
-  id: '__root__' | '/' | '/car-insurance'
+  to: '/' | '/car-insurance' | '/design-options'
+  id: '__root__' | '/' | '/car-insurance' | '/design-options'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CarInsuranceRoute: typeof CarInsuranceRoute
+  DesignOptionsRoute: typeof DesignOptionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CarInsuranceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/design-options': {
+      id: '/design-options'
+      path: '/design-options'
+      fullPath: '/design-options'
+      preLoaderRoute: typeof DesignOptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CarInsuranceRoute: CarInsuranceRoute,
+  DesignOptionsRoute: DesignOptionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
