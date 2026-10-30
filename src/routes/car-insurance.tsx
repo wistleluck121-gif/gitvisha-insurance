@@ -484,7 +484,7 @@ function CarInsurancePage() {
                 </p>
               )}
               <p className="gv-form-note">
-                This demo opens an email draft; it does not store your details on a server.
+                Submitting opens your email client directly; no details are stored on a server.
               </p>
             </form>
           </div>

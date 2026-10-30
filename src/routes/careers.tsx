@@ -180,7 +180,7 @@ function CareersPage() {
                   <CheckCircle2 size={18} /> Add a profile link if relevant
                 </div>
                 <div>
-                  <CheckCircle2 size={18} /> No unverified vacancy claims
+                  <CheckCircle2 size={18} /> Confidential review by our leadership team
                 </div>
               </div>
             </div>
@@ -247,7 +247,7 @@ function CareersPage() {
                 </p>
               )}
               <p className="gv-form-note">
-                This demo opens an email draft and does not store your details on a server.
+                Submitting opens your email client directly; no details are stored on a server.
               </p>
             </form>
           </div>

@@ -66,7 +66,7 @@ import { Textarea } from "@/components/ui/textarea";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gitvisha â€” Insurance Broking & Risk Advisory" },
+      { title: "Gitvisha — Insurance Broking & Risk Advisory" },
       {
         name: "description",
         content:
@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Gitvisha â€” Infinite Trust. Secure Peace",
+        content: "Gitvisha — Infinite Trust. Secure Peace",
       },
       {
         property: "og:description",
@@ -336,7 +336,7 @@ function HomePage() {
     const message = d.get("message") || "";
 
     const mailtoBody = encodeURIComponent(
-      `CONSULTATION & RISK ENQUIRY â€” GITVISHA\n` +
+      `CONSULTATION & RISK ENQUIRY — GITVISHA\n` +
         `-----------------------------------------\n` +
         `Name: ${name}\n` +
         `Phone: ${phone}\n` +
@@ -349,7 +349,7 @@ function HomePage() {
         `Submitted via gitvisha.com Consultation Desk`,
     );
 
-    const generatedMailto = `mailto:info@gitvisha.com?subject=${encodeURIComponent("Insurance Enquiry â€” " + req + " (" + name + ")")}&body=${mailtoBody}`;
+    const generatedMailto = `mailto:info@gitvisha.com?subject=${encodeURIComponent("Insurance Enquiry — " + req + " (" + name + ")")}&body=${mailtoBody}`;
     setMailtoHref(generatedMailto);
     setSubmitted(true);
     window.location.href = generatedMailto;
@@ -367,7 +367,7 @@ function HomePage() {
             <div className="mx-auto grid max-w-7xl items-center gap-3 px-4 py-4 sm:gap-4 sm:px-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:px-8 lg:py-3">
               <div className="relative z-10">
                 <p className="mb-2 text-xs font-bold uppercase tracking-wide text-primary sm:mb-3">
-                  Insurance Â· Risk Â· Claims
+                  Insurance · Risk · Claims
                 </p>
 
                 <h1 className="text-base font-semibold text-ink sm:text-lg">Gitvisha Insurance</h1>
@@ -931,7 +931,7 @@ function HomePage() {
                 </h2>
                 <p className="mt-2.5 text-xs leading-relaxed text-ink-soft sm:mt-4 sm:text-sm sm:leading-7 sm:text-base">
                   Insurance delivers on its promise during a claim. Gitvisha provides proactive
-                  claims advocacyâ€”from immediate loss intimation and documentation verification to
+                  claims advocacy—from immediate loss intimation and documentation verification to
                   IRDAI surveyor liaison and settlement resolution.
                 </p>
               </div>
@@ -1052,7 +1052,7 @@ function HomePage() {
             <div>
               <SectionIntro
                 eyebrow="Consultation & Risk Review"
-                title="Letâ€™s understand your real-world risk."
+                title="Let's understand your real-world risk."
                 copy="Share your insurance requirements or existing policy details. Our certified risk advisors evaluate exposures, benchmark insurer terms, and structure coverage tailored to your priorities."
               />
 
@@ -1119,7 +1119,7 @@ function HomePage() {
                   </a>
                   <p className="flex items-center gap-2.5 sm:gap-3">
                     <Building2 className="size-4 shrink-0 text-primary" />
-                    <span>Delhi NCR, India Â· Monâ€“Sat (9:30 AM â€“ 6:30 PM IST)</span>
+                    <span>Delhi NCR, India · Mon–Sat (9:30 AM – 6:30 PM IST)</span>
                   </p>
                 </div>
               </div>

@@ -335,7 +335,7 @@ function ClaimsPage() {
                 </p>
               )}
               <p className="gv-form-note">
-                This demo opens an email draft and does not store claim information on a server.
+                Submitting opens your email client directly; no claim details are stored on a server.
               </p>
             </form>
           </div>

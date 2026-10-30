@@ -174,7 +174,7 @@ export function FloatingChatbot() {
       q.includes("number")
     ) {
       return {
-        text: "📞 **Request an Expert Insurance Consultation**\n\nOur IRDAI certified risk advisors provide independent, unbiased recommendations. Please fill in your details below and we will contact you within **15 minutes**.",
+        text: "📞 **Request an Expert Insurance Consultation**\n\nOur IRDAI-certified risk advisors provide independent, unbiased recommendations. Please fill in your details below and we will contact you within **15 minutes**.",
         isCallbackForm: true,
       };
     }
@@ -192,7 +192,7 @@ export function FloatingChatbot() {
       q.includes("idv")
     ) {
       return {
-        text: "🚗 **Gitvisha Motor Insurance Advisory**\n\nWe structure real-world automotive coverage across India's top insurers:\n\n• **Zero Depreciation (Bumper-to-Bumper)**: 100% payout on fiber, metal, rubber, and glass without depreciation deductions.\n• **Engine & Gearbox Protector**: Essential for monsoon water ingression / hydrostatic lock.\n• **NCB Retention Shield**: Protects your 20%–50% No Claim Bonus even after a claim.\n• **24x7 Roadside Assistance**: Emergency towing, battery jumpstart, and flat-tyre support nationwide.\n\nWould you like an instant policy comparison or to calculate your premium?",
+        text: "🚗 **Gitvisha Motor Insurance Advisory**\n\nWe structure real-world automotive coverage across India's top insurers:\n\n• **Zero Depreciation (Bumper-to-Bumper)**: 100% payout on fiber, metal, rubber, and glass without depreciation deductions.\n• **Engine & Gearbox Protector**: Essential for monsoon water ingress / hydrostatic lock.\n• **NCB Retention Shield**: Protects your 20%–50% No Claim Bonus even after a claim.\n• **24x7 Roadside Assistance**: Emergency towing, battery jumpstart, and flat-tyre support nationwide.\n\nWould you like an instant policy comparison or to calculate your premium?",
         actions: [
           { label: "View Car Insurance Plans", href: "/car-insurance", actionType: "navigate", icon: "car" },
           { label: "Calculate Premium", href: "/car-insurance#quote", actionType: "navigate", icon: "arrow" },
@@ -263,7 +263,7 @@ export function FloatingChatbot() {
       q.includes("fir")
     ) {
       return {
-        text: "📋 **4-Step Emergency Claims Assistance**\n\nAs your insurance broker, Gitvisha acts as your **dedicated claim advocate** against the insurer:\n\n1. **Immediate Intimation**: Inform us or insurer within 24 hours of incident.\n2. **Evidence Documentation**: Take clear photos/videos of damaged property or vehicle. For theft or road accidents, obtain a Police FIR.\n3. **Survey & Inspection**: We schedule the surveyor visit and ensure accurate loss assessment.\n4. **Settlement**: Rapid cashless approval or direct bank disbursement without unnecessary deductions.\n\nNeed urgent claim support?",
+        text: "📋 **4-Step Emergency Claims Assistance**\n\nAs your insurance broker, Gitvisha acts as your **dedicated claim advocate** against the insurer:\n\n1. **Immediate Intimation**: Inform us or the insurer within 24 hours of an incident.\n2. **Evidence Documentation**: Take clear photos/videos of damaged property or vehicle. For theft or road accidents, obtain a Police FIR.\n3. **Survey & Inspection**: We schedule the surveyor visit and ensure accurate loss assessment.\n4. **Settlement**: Rapid cashless approval or direct bank disbursement without unnecessary deductions.\n\nNeed urgent claim support?",
         actions: [
           { label: "Open Claims Desk", href: "/claims", actionType: "navigate", icon: "claims" },
           { label: "File Intimation Form", href: "/claims#file-claim", actionType: "navigate", icon: "arrow" },
