@@ -361,31 +361,137 @@ function HomePage() {
 
       <div>
         <section id="home" className="scroll-mt-20 border-b border-border bg-secondary">
-          <div className="relative isolate overflow-hidden border-b border-border bg-background">
-            <div className="absolute inset-0 -z-10 bg-background/95" />
+          {/* First Screen / Hero Section Above The Fold */}
+          <div className="relative isolate overflow-hidden border-b border-border bg-background pt-5 pb-7 sm:py-9 lg:py-12">
+            {/* Ambient Background Depth & Subtle Grid */}
+            <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+              {/* Radial gradient wash */}
+              <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1100px] h-[450px] bg-[radial-gradient(ellipse_50%_50%_at_50%_0%,rgba(14,165,233,0.13),transparent_70%)] opacity-85" />
+              {/* Luminous aura behind 3D logo */}
+              <div className="absolute top-1/2 -translate-y-1/2 right-4 lg:right-16 w-[440px] h-[440px] rounded-full bg-gradient-to-tr from-primary/14 via-cyan-500/10 to-pink-500/10 blur-3xl opacity-80" />
+              {/* Soft primary light bloom on left */}
+              <div className="absolute -bottom-24 left-8 w-[380px] h-[380px] rounded-full bg-primary/7 blur-3xl opacity-60" />
+              {/* Fine architectural grid overlay with smooth radial edge fade */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800c_1px,transparent_1px),linear-gradient(to_bottom,#8080800c_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)]" />
+            </div>
 
-            <div className="mx-auto grid max-w-7xl items-center gap-3 px-4 py-4 sm:gap-4 sm:px-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8 lg:px-8 lg:py-3">
-              <div className="relative z-10">
-                <p className="mb-2 text-xs font-bold uppercase tracking-wide text-primary sm:mb-3">
-                  Insurance · Risk · Claims
-                </p>
+            <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 lg:px-8">
+              {/* Left Column: Messaging, CTAs, and Trust Metrics */}
+              <div className="relative z-10 flex flex-col items-start text-left">
+                {/* Live Status Eyebrow Badge */}
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary shadow-2xs backdrop-blur-xs transition-all hover:border-primary/40">
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-ink sm:text-xs">
+                    Independent Broking &amp; Risk Advisory
+                  </span>
+                  <span className="text-ink-soft">·</span>
+                  <span className="text-[11px] font-medium text-ink-soft">
+                    IRDAI-Regulated Insurers
+                  </span>
+                </div>
 
-                <h1 className="text-base font-semibold text-ink sm:text-lg">Gitvisha Insurance</h1>
-
-                <p className="mt-2 max-w-3xl font-display text-2xl font-semibold leading-tight text-ink sm:mt-3 sm:text-4xl lg:text-5xl">
+                {/* Primary Headline */}
+                <h1 className="mt-3.5 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-[3.25rem] lg:leading-[1.12]">
                   Protecting What Matters.
                   <br />
-                  <span className="home-pink-accent">Securing What&apos;s Ahead.</span>
+                  <span className="home-pink-accent font-display">Securing What&apos;s Ahead.</span>
+                </h1>
+
+                {/* Refined Value Proposition */}
+                <p className="mt-3.5 max-w-2xl text-xs leading-relaxed text-ink-soft sm:mt-5 sm:text-sm md:text-base sm:leading-7">
+                  Thoughtful corporate and personal insurance broking tailored around real-world exposures. We benchmark policies across India&apos;s top 15+ insurers, eliminate underinsurance traps, and deliver relentless claims advocacy when it matters most.
                 </p>
 
-                <p className="mt-3 max-w-2xl text-xs leading-relaxed text-ink-soft sm:mt-5 sm:text-sm md:text-base sm:leading-7">
-                  Thoughtful insurance broking and risk advisory to help businesses and individuals
-                  understand exposure, choose suitable protection, and navigate claims with
-                  confidence.
-                </p>
+                {/* High-Impact CTAs */}
+                <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-7">
+                  <Button asChild size="lg" className="h-11 sm:h-12 px-6 shadow-md shadow-primary/20 font-semibold text-xs sm:text-sm transition-all hover:shadow-lg hover:shadow-primary/30">
+                    <a href="#contact" onClick={() => setRequirement("General Insurance Consultation")}>
+                      Get an Advisory Quote <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </Button>
+
+                  <Button asChild variant="outline" size="lg" className="h-11 sm:h-12 px-5 sm:px-6 font-semibold text-xs sm:text-sm border-border bg-card/80 hover:bg-secondary">
+                    <Link to="/claims">
+                      <ShieldCheck className="mr-1.5 size-4 text-primary" />
+                      Claims Assistance Desk
+                    </Link>
+                  </Button>
+                </div>
+
+                {/* Trust Proof Points / Live Highlights Strip */}
+                <div className="mt-7 pt-5 border-t border-border/80 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 w-full">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <ShieldCheck className="size-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-ink">15+ Partners</p>
+                      <p className="text-[10px] text-ink-soft">PSU &amp; Private Insurers</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                      <HeartPulse className="size-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-ink">10,000+ Cashless</p>
+                      <p className="text-[10px] text-ink-soft">Hospitals &amp; Garages</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                      <Scale className="size-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-ink">100% Unbiased</p>
+                      <p className="text-[10px] text-ink-soft">Client-First Advocacy</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                      <Clock className="size-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-ink">&lt; 2 Hr Callback</p>
+                      <p className="text-[10px] text-ink-soft">Dedicated Advisory SLA</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <RiskIntelligenceVisual />
+              {/* Right Column: Preserved 3D Logo in a Premium Presentation Framework */}
+              <div className="relative mx-auto flex w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] items-center justify-center">
+                {/* Floating Micro-Badge Top Right */}
+                <div className="hidden lg:flex absolute -top-1 -right-3 z-20 items-center gap-2.5 rounded-xl border border-border/80 bg-card/95 px-3 py-2 shadow-lg backdrop-blur-md transition-all hover:scale-105">
+                  <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                    <ShieldCheck className="size-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[11px] font-bold text-ink">Zero Room-Rent Cap</p>
+                    <p className="text-[9.5px] text-ink-soft">100% Cashless Approvals</p>
+                  </div>
+                </div>
+
+                {/* Floating Micro-Badge Bottom Left */}
+                <div className="hidden lg:flex absolute -bottom-1 -left-3 z-20 items-center gap-2.5 rounded-xl border border-border/80 bg-card/95 px-3 py-2 shadow-lg backdrop-blur-md transition-all hover:scale-105">
+                  <div className="flex size-7 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <Sparkles className="size-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[11px] font-bold text-ink">Multi-Crore Capacity</p>
+                    <p className="text-[9.5px] text-ink-soft">Industrial &amp; Corporate Risks</p>
+                  </div>
+                </div>
+
+                {/* The Original 3D Logo Visual Component - Exactly Intact */}
+                <RiskIntelligenceVisual />
+              </div>
             </div>
           </div>
 
