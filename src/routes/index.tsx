@@ -495,16 +495,32 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mx-auto max-w-7xl px-4 pb-6 pt-5 sm:px-5 sm:pb-8 sm:pt-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-2.5">
-              <h2 className="text-base font-semibold text-ink sm:text-lg">What would you like to protect?</h2>
+          <div className="mx-auto max-w-7xl px-4 pb-8 pt-6 sm:px-6 sm:pb-12 sm:pt-8 lg:px-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between border-b border-border/60 pb-4">
+              <div>
+                <div className="inline-flex items-center gap-2 mb-1.5">
+                  <span className="flex size-2 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                    Coverage Discovery Engine
+                  </span>
+                </div>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-ink">
+                  What would you like to protect?
+                </h2>
+                <p className="mt-1 text-xs sm:text-sm text-ink-soft">
+                  Select an asset class to explore engineered corporate, motor, health, and transit protection.
+                </p>
+              </div>
+
               <a
                 href="#solutions"
-                className="flex items-center gap-1.5 text-xs font-semibold text-primary"
+                className="group inline-flex items-center gap-2 self-start sm:self-auto rounded-full border border-border/80 bg-card px-4 py-2 text-xs font-bold text-primary shadow-2xs backdrop-blur-xs transition-all hover:border-primary/40 hover:bg-secondary hover:shadow-xs"
               >
-                Explore all solutions <ArrowRight className="size-3.5" />
+                <span>Explore all solutions</span>
+                <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
+
             <ProductSelector onEnquire={setRequirement} />
           </div>
         </section>
